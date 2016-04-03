@@ -2,7 +2,7 @@
 
 namespace Asmaster\EquipTwig\Extension;
 
-class Session extends \Twig_Extension
+class Session extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     use SessionTrait;
 
