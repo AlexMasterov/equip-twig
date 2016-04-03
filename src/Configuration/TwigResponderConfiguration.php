@@ -53,7 +53,7 @@ class TwigResponderConfiguration implements ConfigurationInterface
         $env = $this->env;
 
         if ($cacheDir = $env->getValue('TWIG_CACHE')) {
-         $cacheDir = $this->getRootDir() . DIRECTORY_SEPARATOR . $env->getValue('TWIG_CACHE');
+            $cacheDir = $this->getRootDir() . DIRECTORY_SEPARATOR . $env->getValue('TWIG_CACHE');
         }
 
         $options = [
