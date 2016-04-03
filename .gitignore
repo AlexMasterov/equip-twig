@@ -11,5 +11,4 @@ phpunit.xml
 .env
 .git
 *.log
-*.md
 *.cache
