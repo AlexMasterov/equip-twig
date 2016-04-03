@@ -1,0 +1,35 @@
+{
+  "name": "asmaster/equip-twig",
+  "type": "library",
+  "description": "The Twig integration for the Equip framework",
+  "keywords": ["equip", "twig"],
+  "license": "MIT",
+  "authors": [{
+    "name": "Alex Masterov",
+    "email": "alex.masterow@gmail.com",
+    "homepage": "https://github.com/AlexMasterov/equip-twig"
+  }],
+  "require": {
+    "php": ">=5.5.9|^7.0",
+    "equip/framework": "^1.5",
+    "josegonzalez/dotenv": "^2.0",
+    "twig/twig": "^1.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8|^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Asmaster\\EquipTwig\\": "src/"
+    },
+    "exclude-from-classmap": [
+      "/tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Asmaster\\EquipTwigTests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev"
+}
