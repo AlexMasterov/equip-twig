@@ -2,7 +2,7 @@
   "name": "asmaster/equip-twig",
   "type": "library",
   "description": "The Twig integration for the Equip framework",
-  "keywords": ["equip", "twig"],
+  "keywords": ["equip", "twig", "formatter", "renderer"],
   "license": "MIT",
   "authors": [{
     "name": "Alex Masterov",
