@@ -10,7 +10,7 @@ use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
 use Asmaster\EquipTwig\TemplatePayload;
 
-class TwigResponderConfiguration implements ConfigurationInterface
+class TwigConfiguration implements ConfigurationInterface
 {
     use EnvTrait;
 

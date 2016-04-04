@@ -6,9 +6,9 @@ use Auryn\Injector;
 use Equip\Configuration\AurynConfiguration;
 use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
-use Asmaster\EquipTwig\Configuration\TwigResponderConfiguration;
+use Asmaster\EquipTwig\Configuration\TwigConfiguration;
 
-class TwigResponderConfigurationTest extends \PHPUnit_Framework_TestCase
+class TwigConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     public function testApply()
     {
@@ -29,7 +29,7 @@ class TwigResponderConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         return [
             AurynConfiguration::class,
-            TwigResponderConfiguration::class
+            TwigConfiguration::class
         ];
     }
 }
