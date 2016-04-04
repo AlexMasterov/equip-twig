@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwigtests;
+namespace Asmaster\EquipTwigTests;
 
 use Asmaster\EquipTwig\TemplatePayload;
 
