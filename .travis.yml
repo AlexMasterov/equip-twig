@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer update --no-interaction --prefer-source
+
+script:
+  - vendor/bin/phpunit --disallow-test-output --report-useless-tests
+
+after_script:
+  - bash -c '[[ -f "build/logs/clover.xml" ]] && wget https://scrutinizer-ci.com/ocular.phar'
+  - bash -c '[[ -f "build/logs/clover.xml" ]] && php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml'
