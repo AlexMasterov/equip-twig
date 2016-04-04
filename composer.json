@@ -1,13 +1,18 @@
 {
   "name": "asmaster/equip-twig",
-  "type": "library",
   "description": "The Twig integration for the Equip framework",
-  "keywords": ["equip", "twig", "formatter", "renderer"],
+  "type": "library",
+  "keywords": [
+    "equip",
+    "twig",
+    "formatter",
+    "renderer"
+  ],
   "license": "MIT",
+  "homepage": "https://github.com/AlexMasterov/equip-twig",
   "authors": [{
     "name": "Alex Masterov",
-    "email": "alex.masterow@gmail.com",
-    "homepage": "https://github.com/AlexMasterov/equip-twig"
+    "email": "alex.masterow@gmail.com"
   }],
   "require": {
     "php": ">=5.5.9|^7.0",
@@ -30,6 +35,5 @@
     "psr-4": {
       "Asmaster\\EquipTwigTests\\": "tests/"
     }
-  },
-  "minimum-stability": "dev"
+  }
 }
