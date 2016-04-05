@@ -2,10 +2,10 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
-use Asmaster\EquipTwig\Extension\RequestUri;
+use Asmaster\EquipTwig\Extension\RequestExtension;
 use Asmaster\EquipTwig\Extension\Session;
 
-class TwigDefaultExtenstion extends TwigExtensionSet
+class TwigDefaultExtension extends TwigExtensionSet
 {
     /**
      * @param array $extensions
@@ -13,7 +13,7 @@ class TwigDefaultExtenstion extends TwigExtensionSet
     public function __construct(array $extensions = [])
     {
         $defaults = [
-            RequestUri::class
+            RequestExtension::class
         ];
 
         // equip/session

@@ -5,21 +5,21 @@ namespace Asmaster\EquipTwigTests\Extension;
 use Zend\Diactoros\Uri;
 use Zend\Diactoros\Stream;
 use Zend\Diactoros\ServerRequest;
-use Asmaster\EquipTwig\Extension\RequestUri;
+use Asmaster\EquipTwig\Extension\RequestExtension;
 
-class RequestUriTest extends \PHPUnit_Framework_TestCase
+class RequestExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddExtension()
     {
         $request = $this->getMock(ServerRequest::class);
-        $extenstion = new RequestUri($request);
+        $extenstion = new RequestExtension($request);
 
         $loader = $this->getMock('\Twig_LoaderInterface');
 
         $twig = new \Twig_Environment($loader);
         $twig->addExtension($extenstion);
 
-        $this->assertArrayHasKey('requestUri', $twig->getExtensions());
+        $this->assertArrayHasKey('request', $twig->getExtensions());
         $this->assertArrayHasKey('absolute_url', $twig->getFunctions());
     }
 
@@ -38,7 +38,7 @@ class RequestUriTest extends \PHPUnit_Framework_TestCase
             $headers = []
         );
 
-        $extension = new RequestUri($request);
+        $extension = new RequestExtension($request);
         $absoluteUrl = $extension->generateAbsoluteUrl($path);
 
         $this->assertEquals($expected, $absoluteUrl);

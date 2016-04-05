@@ -2,7 +2,7 @@
 
 namespace Asmaster\EquipTwig\Extension;
 
-class RequestUri extends \Twig_Extension
+class RequestExtension extends \Twig_Extension
 {
     use ServerRequestTrait;
 
@@ -11,7 +11,7 @@ class RequestUri extends \Twig_Extension
      */
     public function getName()
     {
-        return 'requestUri';
+        return 'request';
     }
 
     public function getFunctions()
