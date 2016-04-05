@@ -3,14 +3,14 @@
 namespace Asmaster\EquipTwigTests\Extension;
 
 use Equip\SessionInterface;
-use Asmaster\EquipTwig\Extension\Session;
+use Asmaster\EquipTwig\Extension\SessionExtension;
 
-class SessionTest extends \PHPUnit_Framework_TestCase
+class SessionExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddExtension()
     {
         $session = $this->getMock(SessionInterface::class);
-        $extenstion = new Session($session);
+        $extenstion = new SessionExtension($session);
 
         $loader = $this->getMock('\Twig_LoaderInterface');
 
