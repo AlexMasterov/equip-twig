@@ -33,11 +33,12 @@ class RequestExtension extends \Twig_Extension
 
         $uri = $this->request->getUri();
 
-        if ('' === $host = $uri->getHost()) {
+        $host = $uri->getHost();
+        if ('' === $host) {
             return $path;
         }
 
-        if ($uri->getPort()) {
+        if (null !== $uri->getPort()) {
             $host .= ':'.$uri->getPort();
         }
 
