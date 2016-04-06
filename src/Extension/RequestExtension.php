@@ -17,7 +17,8 @@ class RequestExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('absolute_url', [$this, 'generateAbsoluteUrl'])
+            new \Twig_SimpleFunction('absolute_url', [$this, 'generateAbsoluteUrl']),
+            new \Twig_SimpleFunction('relative_url', [$this, 'generateRelativeUrl'])
         ];
     }
 
@@ -39,14 +40,59 @@ class RequestExtension extends \Twig_Extension
         }
 
         if (null !== $uri->getPort()) {
-            $host .= ':'.$uri->getPort();
+            $host .= ':' . $uri->getPort();
         }
 
         if (! $this->hasLeadingSlash($path)) {
-            $path = rtrim($uri->getPath(), '/').'/'.$path;
+            $path = rtrim($uri->getPath(), '/') . '/' . $path;
         }
 
-        return $uri->getScheme().'://'.$host.$path;
+        return $uri->getScheme() . '://' . $host.$path;
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    public function generateRelativeUrl($path)
+    {
+        if ($this->isNetworkPath($path)
+            || ! $this->hasLeadingSlash($path)
+        ) {
+            return $path;
+        }
+
+        $uri = $this->request->getUri();
+
+        $basePath = $uri->getPath();
+        if ($path === $basePath) {
+            return '';
+        }
+
+        $baseParts = explode('/', $basePath, -1);
+        $pathParts = explode('/', $path);
+
+        foreach ($baseParts as $i => $segment) {
+            if (isset($pathParts[$i]) && $segment === $pathParts[$i]) {
+                unset($baseParts[$i], $pathParts[$i]);
+            } else {
+                break;
+            }
+        }
+
+        $path = str_repeat('../', count($baseParts)) . implode('/', $pathParts);
+
+        if (empty($path)) {
+            return './';
+        }
+
+        if (empty($baseParts)
+            && false !== strpos(current($pathParts), ':')
+        ) {
+            $path = './' . $path;
+        }
+
+        return $path;
     }
 
     /**
@@ -55,7 +101,8 @@ class RequestExtension extends \Twig_Extension
      */
     private function isNetworkPath($path)
     {
-        return false !== strpos($path, '://') || '//' === substr($path, 0, 2);
+        return false !== strpos($path, '://')
+            || '//' === substr($path, 0, 2);
     }
 
     /**

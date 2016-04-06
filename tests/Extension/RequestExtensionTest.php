@@ -21,6 +21,7 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('request', $twig->getExtensions());
         $this->assertArrayHasKey('absolute_url', $twig->getFunctions());
+        $this->assertArrayHasKey('relative_url', $twig->getFunctions());
     }
 
     /**
@@ -56,6 +57,43 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
             ['/foo.png', 'http://localhost:8080', 'http://localhost:8080/foo.png'],
             ['/foo.png', 'https://localhost:443', 'https://localhost/foo.png'],
             ['/', 'http://localhost', 'http://localhost/'],
+            ['//', 'http://localhost', '//']
+        ];
+    }
+
+    /**
+     * @dataProvider getGenerateRelativeUrlData()
+     */
+    public function testGenerateRelativeUrl($path, $url, $expected)
+    {
+        $uri = new Uri($url);
+        $request = new ServerRequest(
+            $server  = [],
+            $files   = [],
+            $uri     = $uri,
+            $method  = 'GET',
+            $body    = 'php://input',
+            $headers = []
+        );
+
+        $extension = new RequestExtension($request);
+        $relativeUrl = $extension->generateRelativeUrl($path);
+
+        $this->assertEquals($expected, $relativeUrl);
+    }
+
+    public function getGenerateRelativeUrlData()
+    {
+        return [
+            ['/a/b/c/foo.png', 'http://localhost/a/b/c/d', 'foo.png'],
+            ['/a/b/foo.png', 'http://localhost/a/b/c/d', '../foo.png'],
+            ['/a/b/c/d', 'http://localhost/a/b/c/d', ''],
+            ['/a/b/c/', 'http://localhost/a/b/c/d', './'],
+            ['/a/b/c/other', 'http://localhost/a/b/c/d', 'other'],
+            ['/a/b/z/foo.png', 'http://localhost/a/b/c/d', '../z/foo.png'],
+            ['/a/b/c/this:that', 'http://localhost/a/b/c/d', './this:that'],
+            ['/a/b/c/foo/this:that', 'http://localhost/a/b/c/d', 'foo/this:that'],
+            ['/', 'http://localhost', '/'],
             ['//', 'http://localhost', '//']
         ];
     }
