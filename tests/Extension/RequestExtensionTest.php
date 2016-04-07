@@ -11,6 +11,10 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddExtension()
     {
+        if (!class_exists('\Twig_Environment')) {
+            $this->markTestSkipped('Twig is not installed');
+        }
+
         $request = $this->getMock(ServerRequest::class);
         $extenstion = new RequestExtension($request);
 
@@ -29,15 +33,7 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateAbsoluteUrl($path, $url, $expected)
     {
-        $uri = new Uri($url);
-        $request = new ServerRequest(
-            $server  = [],
-            $files   = [],
-            $uri     = $uri,
-            $method  = 'GET',
-            $body    = 'php://input',
-            $headers = []
-        );
+        $request = $this->createRequest($url);
 
         $extension = new RequestExtension($request);
         $absoluteUrl = $extension->generateAbsoluteUrl($path);
@@ -66,15 +62,7 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateRelativeUrl($path, $url, $expected)
     {
-        $uri = new Uri($url);
-        $request = new ServerRequest(
-            $server  = [],
-            $files   = [],
-            $uri     = $uri,
-            $method  = 'GET',
-            $body    = 'php://input',
-            $headers = []
-        );
+        $request = $this->createRequest($url);
 
         $extension = new RequestExtension($request);
         $relativeUrl = $extension->generateRelativeUrl($path);
@@ -96,5 +84,25 @@ class RequestExtensionTest extends \PHPUnit_Framework_TestCase
             ['/', 'http://localhost', '/'],
             ['//', 'http://localhost', '//']
         ];
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return ServerRequest $request
+     */
+    public function createRequest($url)
+    {
+        $uri = new Uri($url);
+        $request = new ServerRequest(
+            $server  = [],
+            $files   = [],
+            $uri     = $uri,
+            $method  = 'GET',
+            $body    = 'php://input',
+            $headers = []
+        );
+
+        return $request;
     }
 }

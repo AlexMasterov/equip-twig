@@ -8,6 +8,9 @@ use Lukasoppermann\Httpstatus\Httpstatus;
 
 class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var TwigFormatter
+     */
     protected $formatter;
 
     public function setUp()
@@ -16,13 +19,10 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Twig is not installed');
         }
 
-        $loaderFilesystem = new \Twig_Loader_Filesystem(__DIR__ . '/_templates');
-        $environment = new \Twig_Environment($loaderFilesystem, array());
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/_templates');
+        $twig = new \Twig_Environment($loader);
 
-        $this->formatter = new TwigFormatter(
-            $environment,
-            new HttpStatus
-        );
+        $this->formatter = new TwigFormatter($twig, new HttpStatus);
     }
 
     public function testAccepts()
