@@ -47,7 +47,7 @@ class RequestExtension extends \Twig_Extension
             $path = rtrim($uri->getPath(), '/') . '/' . $path;
         }
 
-        return $uri->getScheme() . '://' . $host.$path;
+        return $uri->getScheme() . '://' . $host . $path;
     }
 
     /**
@@ -56,16 +56,14 @@ class RequestExtension extends \Twig_Extension
      */
     public function generateRelativeUrl($path)
     {
-        if ($this->isNetworkPath($path)
-            || ! $this->hasLeadingSlash($path)
-        ) {
+        if ($this->isNetworkPath($path) || ! $this->hasLeadingSlash($path)) {
             return $path;
         }
 
         $uri = $this->request->getUri();
 
         $basePath = $uri->getPath();
-        if ($path === $basePath) {
+        if ($basePath === $path) {
             return '';
         }
 
@@ -82,13 +80,11 @@ class RequestExtension extends \Twig_Extension
 
         $path = str_repeat('../', count($baseParts)) . implode('/', $pathParts);
 
-        if (empty($path)) {
+        if ('' === $path) {
             return './';
         }
 
-        if (empty($baseParts)
-            && false !== strpos(current($pathParts), ':')
-        ) {
+        if (empty($baseParts) && false !== strpos(current($pathParts), ':')) {
             $path = './' . $path;
         }
 
