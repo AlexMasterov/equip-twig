@@ -10,13 +10,13 @@ use Lukasoppermann\Httpstatus\Httpstatus;
 class TwigFormatter extends HtmlFormatter
 {
     /**
-     * @var Twig_Environment
+     * @var \Twig_Environment
      */
     protected $environment;
 
     /**
-     * @param Twig_Environment $environment
-     * @param Httpstatus       $httpStatus
+     * @param \Twig_Environment $environment
+     * @param Httpstatus        $httpStatus
      */
     public function __construct(\Twig_Environment $environment, Httpstatus $httpStatus)
     {
@@ -25,7 +25,7 @@ class TwigFormatter extends HtmlFormatter
     }
 
     /**
-     * @param PayloadInterface $payload
+     * @param TemplatePayload $payload
      * @return string
      */
     public function body(PayloadInterface $payload)
