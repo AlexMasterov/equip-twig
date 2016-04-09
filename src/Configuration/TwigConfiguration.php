@@ -3,12 +3,10 @@
 namespace Asmaster\EquipTwig\Configuration;
 
 use Auryn\Injector;
-use Equip\Adr\PayloadInterface;
 use Equip\Configuration\EnvTrait;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
-use Asmaster\EquipTwig\TemplatePayload;
 
 class TwigConfiguration implements ConfigurationInterface
 {
@@ -23,9 +21,10 @@ class TwigConfiguration implements ConfigurationInterface
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
 
-        $injector->prepare(PayloadInterface::class, function () {
-            return new TemplatePayload();
-        });
+        $injector->alias(
+            'Equip\Adr\PayloadInterface',
+            'Asmaster\EquipTwig\TemplatePayload'
+        );
 
         $injector->prepare(\Twig_Loader_Filesystem::class, [$this, 'prepareFilesystem']);
 
@@ -40,7 +39,7 @@ class TwigConfiguration implements ConfigurationInterface
      */
     public function prepareFilesystem(\Twig_Loader_Filesystem $loader)
     {
-        $templates = $this->getRootDir() . DIRECTORY_SEPARATOR . $this->env->getValue('TWIG_TEMPLATES');
+        $templates = $this->env->getValue('TWIG_TEMPLATES');
 
         $loader->addPath($templates);
     }
@@ -52,28 +51,13 @@ class TwigConfiguration implements ConfigurationInterface
     {
         $env = $this->env;
 
-        if ($cacheDir = $env->getValue('TWIG_CACHE')) {
-            $cacheDir = $this->getRootDir() . DIRECTORY_SEPARATOR . $env->getValue('TWIG_CACHE');
-        }
-
         $options = [
             'debug'            => $env->getValue('TWIG_DEBUG') ?: false,
             'auto_reload'      => $env->getValue('TWIG_AUTO_RELOAD') ?: true,
             'strict_variables' => $env->getValue('TWIG_STRICT_VARIABLES') ?: false,
-            'cache'            => $cacheDir
+            'cache'            => $env->getValue('TWIG_CACHE') ?: false
         ];
 
         return $options;
-    }
-
-    /**
-     * @return string $rootDir
-     */
-    protected function getRootDir()
-    {
-        // TODO: PHP7 dirname(__DIR__, 5)
-        $rootDir = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
-
-        return $rootDir;
     }
 }
