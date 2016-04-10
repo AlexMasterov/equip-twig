@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwigTests\Configuration;
+namespace Asmaster\EquipTwig\Tests\Configuration;
 
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;

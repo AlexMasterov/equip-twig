@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwigtests\Configuration;
+namespace Asmaster\EquipTwig\Tests\Configuration;
 
 use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 use Asmaster\EquipTwig\Extension\RequestExtension;
@@ -12,7 +12,7 @@ class TwigDefaultExtensionTest extends \PHPUnit_Framework_TestCase
     {
         if (! interface_exists('Equip\SessionInterface')) {
             class_alias(
-                'Asmaster\EquipTwigTests\Fake\FakeInterface',
+                'Asmaster\EquipTwig\Tests\Fake\FakeInterface',
                 'Equip\SessionInterface'
             );
         }

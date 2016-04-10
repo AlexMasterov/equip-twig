@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwigTests\Extension;
+namespace Asmaster\EquipTwig\Tests\Extension;
 
 use Equip\SessionInterface;
 use Asmaster\EquipTwig\Extension\SessionExtension;

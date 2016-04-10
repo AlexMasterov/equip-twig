@@ -1,5 +1,5 @@
 <?php
 
-namespace Asmaster\EquipTwigTests\Fake;
+namespace Asmaster\EquipTwig\Tests\Fake;
 
 interface FakeInterface {}

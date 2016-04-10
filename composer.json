@@ -33,7 +33,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Asmaster\\EquipTwigTests\\": "tests/"
+      "Asmaster\\EquipTwig\\Tests\\": "tests/"
     }
   }
 }
