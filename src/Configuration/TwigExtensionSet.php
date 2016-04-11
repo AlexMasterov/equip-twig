@@ -22,10 +22,10 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
      */
     public function prepareExtension(\Twig_Environment $environment, Injector $injector)
     {
-        $extensions = $this;
+        $extensions = $this->toArray();
 
         if ($environment->isDebug()) {
-            $extensions = $this->withValue(\Twig_Extension_Debug::class);
+            $extensions[] = \Twig_Extension_Debug::class;
         }
 
         foreach ($extensions as $extension) {
