@@ -2,8 +2,8 @@
 
 namespace Asmaster\EquipTwig\Tests;
 
+use Equip\Payload;
 use Asmaster\EquipTwig\TwigFormatter;
-use Asmaster\EquipTwig\TemplatePayload;
 use Lukasoppermann\Httpstatus\Httpstatus;
 
 class TwigFormatterTest extends \PHPUnit_Framework_TestCase
@@ -37,12 +37,13 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testResponse()
     {
-        $payload = (new TemplatePayload)
+        $payload = (new Payload)
             ->withOutput([
-                'header' => 'header',
-                'body'   => 'body',
-                'footer' => 'footer',
-            ])->withTemplate('index.html.twig');
+                'template' => 'index.html.twig',
+                'header'   => 'header',
+                'body'     => 'body',
+                'footer'   => 'footer',
+            ]);
 
         $body = (string) $this->formatter->body($payload);
         $this->assertEquals("<h1>header</h1>\n<p>body</p>\n<span>footer</span>\n", $body);

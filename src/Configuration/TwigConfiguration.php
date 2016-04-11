@@ -21,11 +21,6 @@ class TwigConfiguration implements ConfigurationInterface
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
 
-        $injector->alias(
-            'Equip\Adr\PayloadInterface',
-            'Asmaster\EquipTwig\TemplatePayload'
-        );
-
         $injector->prepare(\Twig_Loader_Filesystem::class, [$this, 'prepareFilesystem']);
 
         $injector->define(\Twig_Environment::class, [
