@@ -35,7 +35,7 @@ class RequestExtension extends \Twig_Extension
         $uri = $this->request->getUri();
 
         $host = $uri->getHost();
-        if ('' === $host) {
+        if (empty($host)) {
             return $path;
         }
 
@@ -80,7 +80,7 @@ class RequestExtension extends \Twig_Extension
 
         $path = str_repeat('../', count($baseParts)) . implode('/', $pathParts);
 
-        if ('' === $path) {
+        if (empty($path)) {
             return './';
         }
 
