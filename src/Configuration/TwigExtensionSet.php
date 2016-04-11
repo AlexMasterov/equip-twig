@@ -17,8 +17,8 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
     }
 
     /**
-     * @param Twig_Environment $environment
-     * @param Injector         $injector
+     * @param \Twig_Environment $environment
+     * @param Injector          $injector
      */
     public function prepareExtension(\Twig_Environment $environment, Injector $injector)
     {
