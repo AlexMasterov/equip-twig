@@ -29,7 +29,7 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
         }
 
         foreach ($extensions as $extension) {
-            if (! is_object($extension)) {
+            if (!is_object($extension)) {
                 $environment->addExtension(
                     $injector->make($extension)
                 );

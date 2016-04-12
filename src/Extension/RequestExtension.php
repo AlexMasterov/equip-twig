@@ -24,6 +24,7 @@ class RequestExtension extends \Twig_Extension
 
     /**
      * @param string $path
+     *
      * @return string
      */
     public function generateAbsoluteUrl($path)
@@ -43,7 +44,7 @@ class RequestExtension extends \Twig_Extension
             $host .= ':' . $uri->getPort();
         }
 
-        if (! $this->hasLeadingSlash($path)) {
+        if (!$this->hasLeadingSlash($path)) {
             $path = rtrim($uri->getPath(), '/') . '/' . $path;
         }
 
@@ -52,11 +53,12 @@ class RequestExtension extends \Twig_Extension
 
     /**
      * @param string $path
+     *
      * @return string
      */
     public function generateRelativeUrl($path)
     {
-        if ($this->isNetworkPath($path) || ! $this->hasLeadingSlash($path)) {
+        if ($this->isNetworkPath($path) || !$this->hasLeadingSlash($path)) {
             return $path;
         }
 
@@ -93,16 +95,17 @@ class RequestExtension extends \Twig_Extension
 
     /**
      * @param string $path
+     *
      * @return bool
      */
     private function isNetworkPath($path)
     {
-        return false !== strpos($path, '://')
-            || '//' === substr($path, 0, 2);
+        return false !== strpos($path, '://') || '//' === substr($path, 0, 2);
     }
 
     /**
      * @param string $path
+     *
      * @return bool
      */
     private function hasLeadingSlash($path)
