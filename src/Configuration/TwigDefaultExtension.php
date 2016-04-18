@@ -3,7 +3,6 @@
 namespace Asmaster\EquipTwig\Configuration;
 
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
-use Asmaster\EquipTwig\Extension\RequestExtension;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
 class TwigDefaultExtension extends TwigExtensionSet
