@@ -7,8 +7,10 @@ use Equip\Configuration\EnvTrait;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
 
-class TwigConfiguration implements ConfigurationInterface
+class TwigResponderConfiguration implements ConfigurationInterface
 {
     use EnvTrait;
 
@@ -21,28 +23,20 @@ class TwigConfiguration implements ConfigurationInterface
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
 
-        $injector->prepare(\Twig_Loader_Filesystem::class, [$this, 'prepareFilesystem']);
-
-        $injector->define(\Twig_Environment::class, [
-            'loader'   => \Twig_Loader_Filesystem::class,
-            ':options' => $this->prepareOptions()
+        $injector->define(Twig_Loader_Filesystem::class, [
+            ':paths' => $this->env->getValue('TWIG_TEMPLATES')
         ]);
-    }
 
-    /**
-     * @param Twig_Loader_Filesystem $loader
-     */
-    public function prepareFilesystem(\Twig_Loader_Filesystem $loader)
-    {
-        $templates = $this->env->getValue('TWIG_TEMPLATES');
-
-        $loader->addPath($templates);
+        $injector->define(Twig_Environment::class, [
+            'loader'   => Twig_Loader_Filesystem::class,
+            ':options' => $this->getOptions()
+        ]);
     }
 
     /**
      * @return array $options
      */
-    public function prepareOptions()
+    public function getOptions()
     {
         $env = $this->env;
 
