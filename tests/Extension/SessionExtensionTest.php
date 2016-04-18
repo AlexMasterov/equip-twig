@@ -11,7 +11,7 @@ class SessionExtensionTest extends PHPUnit_Framework_TestCase
 {
     public function testExtension()
     {
-        $session  = $this->getMock(SessionInterface::class);
+        $session = $this->getMock(SessionInterface::class);
         $extension = new SessionExtension($session);
 
         $this->assertInstanceOf(Twig_ExtensionInterface::class, $extension);

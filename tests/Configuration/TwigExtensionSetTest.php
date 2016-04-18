@@ -2,43 +2,34 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
+use PHPUnit_Framework_TestCase;
 use Auryn\Injector;
+use Twig_Environment;
+use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 
-class TwigExtensionSetTest extends \PHPUnit_Framework_TestCase 
+class TwigExtensionSetTest extends PHPUnit_Framework_TestCase 
 {
     public function testSet()
     {
         $defaultExtension = new TwigExtensionSet();
-        $this->assertEmpty($defaultExtension->toArray());
 
-        $e1 = 'Extension1';
-        $e2 = 'Extension2';
-        $e3 = 'Extension3';
-
-        $defaultExtension = $defaultExtension->withValue($e1);
-        $this->assertContains($e1, $defaultExtension);
-
-        $defaultExtension = $defaultExtension->withValueBefore($e2, $e1);
-        $defaultExtension = $defaultExtension->withValueAfter($e3, $e1);
-
-        $this->assertSame([$e2, $e1, $e3], $defaultExtension->toArray());
+        $this->assertInstanceOf(Set::class, $defaultExtension);
+        $this->assertInstanceOf(ConfigurationInterface::class, $defaultExtension);
     }
 
     public function testApply()
     {
-        $injector = new Injector;
-
-        $injector->define(\Twig_Environment::class, [
+        $injector = new Injector();
+        $injector->define(Twig_Environment::class, [
             ':options' => ['debug' => true]
         ]);
 
         $extensionSet = new TwigExtensionSet();
         $extensionSet->apply($injector);
 
-        $twig = $injector->make(\Twig_Environment::class);
-
+        $twig = $injector->make(Twig_Environment::class);
         $this->assertArrayHasKey('debug', $twig->getExtensions());
     }
 }

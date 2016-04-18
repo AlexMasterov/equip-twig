@@ -2,11 +2,14 @@
 
 namespace Asmaster\EquipTwig\Tests;
 
-use Equip\Payload;
+use PHPUnit_Framework_TestCase;
+use Equip\Adr\PayloadInterface;
 use Asmaster\EquipTwig\TwigFormatter;
 use Lukasoppermann\Httpstatus\Httpstatus;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
 
-class TwigFormatterTest extends \PHPUnit_Framework_TestCase
+class TwigFormatterTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var TwigFormatter
@@ -15,12 +18,8 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!class_exists('\Twig_Environment')) {
-            $this->markTestSkipped('Twig is not installed');
-        }
-
-        $loader = new \Twig_Loader_Filesystem(__DIR__.'/_templates');
-        $twig = new \Twig_Environment($loader);
+        $loader = new Twig_Loader_Filesystem(__DIR__.'/Asset/templates');
+        $twig = new Twig_Environment($loader);
 
         $this->formatter = new TwigFormatter($twig, new HttpStatus);
     }
@@ -37,13 +36,19 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testResponse()
     {
-        $payload = (new Payload)
-            ->withOutput([
-                'template' => 'index.html.twig',
-                'header'   => 'header',
-                'body'     => 'body',
-                'footer'   => 'footer',
-            ]);
+        $output = [
+            'template' => 'index.html.twig',
+            'header'   => 'header',
+            'body'     => 'body',
+            'footer'   => 'footer'
+        ];
+
+        /** @var PayloadInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $payload = $this->getMock(PayloadInterface::class);
+        $payload
+            ->expects($this->any())
+            ->method('getOutput')
+            ->will($this->returnValue($output));
 
         $body = (string) $this->formatter->body($payload);
         $this->assertEquals("<h1>header</h1>\n<p>body</p>\n<span>footer</span>\n", $body);

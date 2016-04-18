@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig\tests\Configuration;
+namespace Asmaster\EquipTwig\Tests\Configuration;
 
 use PHPUnit_Framework_TestCase;
 use Auryn\Injector;

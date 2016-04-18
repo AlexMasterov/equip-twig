@@ -3,6 +3,8 @@
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
 use PHPUnit_Framework_TestCase;
+use Equip\SessionInterface;
+use Asmaster\EquipTwig\Tests\Asset\EmptyInterface;
 use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
@@ -12,8 +14,8 @@ class TwigDefaultExtensionTest extends PHPUnit_Framework_TestCase
     {
         if (!interface_exists('Equip\SessionInterface')) {
             class_alias(
-                'Asmaster\EquipTwig\Tests\Fake\FakeInterface',
-                'Equip\SessionInterface'
+                EmptyInterface::class,
+                SessionInterface::class
             );
         }
     }
@@ -25,7 +27,6 @@ class TwigDefaultExtensionTest extends PHPUnit_Framework_TestCase
         ];
 
         $extensions = new TwigDefaultExtension();
-
         $this->assertSame($defaults, $extensions->toArray());
     }
 }
