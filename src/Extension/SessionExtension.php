@@ -2,7 +2,12 @@
 
 namespace Asmaster\EquipTwig\Extension;
 
-class SessionExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+use Twig_Extension;
+use Twig_Extension_GlobalsInterface;
+
+class SessionExtension
+    extends Twig_Extension
+    implements Twig_Extension_GlobalsInterface
 {
     use SessionTrait;
 
@@ -11,7 +16,7 @@ class SessionExtension extends \Twig_Extension implements \Twig_Extension_Global
      */
     public function getName()
     {
-        return 'session';
+        return 'equip_session';
     }
 
     public function getGlobals()

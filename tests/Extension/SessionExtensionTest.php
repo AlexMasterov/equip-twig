@@ -2,22 +2,22 @@
 
 namespace Asmaster\EquipTwig\Tests\Extension;
 
+use PHPUnit_Framework_TestCase;
 use Equip\SessionInterface;
+use Twig_ExtensionInterface;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
-class SessionExtensionTest extends \PHPUnit_Framework_TestCase
+class SessionExtensionTest extends PHPUnit_Framework_TestCase
 {
-    public function testAddExtension()
+    public function testExtension()
     {
-        $session = $this->getMock(SessionInterface::class);
-        $extenstion = new SessionExtension($session);
+        $session  = $this->getMock(SessionInterface::class);
+        $extension = new SessionExtension($session);
 
-        $loader = $this->getMock('\Twig_LoaderInterface');
-
-        $twig = new \Twig_Environment($loader);
-        $twig->addExtension($extenstion);
-
-        $this->assertArrayHasKey('session', $twig->getExtensions());
-        $this->assertArrayHasKey('session', $twig->getGlobals());
+        $this->assertInstanceOf(Twig_ExtensionInterface::class, $extension);
+        $this->assertSame('equip_session', $extension->getName());
+        
+        $this->assertArrayHasKey('session', $extension->getGlobals());
+        $this->assertInstanceOf(SessionInterface::class, $extension->getGlobals()['session']);
     }
 }
