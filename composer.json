@@ -17,11 +17,10 @@
   "require": {
     "php": "^5.5.9 || ^7.0",
     "equip/framework": "^1.0",
-    "josegonzalez/dotenv": "^1.0 || ^2.0",
     "twig/twig": "^1.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.5 || ^5.0.5"
+    "phpunit/phpunit": "^4.8 || ^5.0.5"
   },
   "autoload": {
     "psr-4": {
@@ -35,5 +34,9 @@
     "psr-4": {
       "Asmaster\\EquipTwig\\Tests\\": "tests/"
     }
+  },
+  "suggest": {
+    "asmaster/twig-extension": "For a custom extensions",
+    "josegonzalez/dotenv": "For environment based configuration loading"
   }
 }

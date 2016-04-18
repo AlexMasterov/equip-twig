@@ -2,6 +2,7 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
+use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 use Asmaster\EquipTwig\Extension\RequestExtension;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
@@ -12,15 +13,11 @@ class TwigDefaultExtension extends TwigExtensionSet
      */
     public function __construct(array $extensions = [])
     {
-        $defaults = [
-            RequestExtension::class
-        ];
-
         // equip/session
         if (interface_exists('Equip\SessionInterface')) {
-            $defaults[] = SessionExtension::class;
+            $extensions[] = SessionExtension::class;
         }
 
-        parent::__construct(array_merge($defaults, $extensions));
+        parent::__construct($extensions);
     }
 }
