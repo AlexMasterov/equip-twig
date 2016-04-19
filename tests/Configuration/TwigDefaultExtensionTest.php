@@ -2,13 +2,13 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Equip\SessionInterface;
 use Asmaster\EquipTwig\Tests\Asset\EmptyInterface;
 use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
-class TwigDefaultExtensionTest extends PHPUnit_Framework_TestCase
+class TwigDefaultExtensionTest extends TestCase
 {
     public function setUp()
     {

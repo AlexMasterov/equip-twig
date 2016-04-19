@@ -2,12 +2,12 @@
 
 namespace Asmaster\EquipTwig\Tests\Extension;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Equip\SessionInterface;
 use Twig_ExtensionInterface;
 use Asmaster\EquipTwig\Extension\SessionExtension;
 
-class SessionExtensionTest extends PHPUnit_Framework_TestCase
+class SessionExtensionTest extends TestCase
 {
     public function testExtension()
     {

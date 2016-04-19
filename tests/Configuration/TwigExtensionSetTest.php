@@ -2,14 +2,14 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Auryn\Injector;
 use Twig_Environment;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 
-class TwigExtensionSetTest extends PHPUnit_Framework_TestCase 
+class TwigExtensionSetTest extends TestCase 
 {
     public function testSet()
     {
