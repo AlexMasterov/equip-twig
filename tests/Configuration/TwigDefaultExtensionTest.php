@@ -12,7 +12,7 @@ class TwigDefaultExtensionTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (!interface_exists('Equip\SessionInterface')) {
+        if (!interface_exists(SessionInterface::class)) {
             class_alias(
                 EmptyInterface::class,
                 SessionInterface::class
