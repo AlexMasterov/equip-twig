@@ -42,15 +42,15 @@ class TwigFormatter extends HtmlFormatter
     protected function render(PayloadInterface $payload)
     {
         $template = $this->template($payload);
-        $context = $this->context($payload);
+        $output = $this->output($payload);
 
-        return $this->environment->render($template, $context);
+        return $this->environment->render($template, $output);
     }
 
     /**
      * @param PayloadInterface $payload
      *
-     * @return string
+     * @return string Template name
      */
     protected function template(PayloadInterface $payload)
     {
@@ -60,13 +60,13 @@ class TwigFormatter extends HtmlFormatter
     /**
      * @param PayloadInterface $payload
      *
-     * @return array $context
+     * @return array $output
      */
-    protected function context(PayloadInterface $payload)
+    protected function output(PayloadInterface $payload)
     {
-        $context = $payload->getOutput();
-        unset($context['template']);
+        $output = $payload->getOutput();
+        unset($output['template']);
 
-        return $context;
+        return $output;
     }
 }
