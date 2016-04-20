@@ -72,6 +72,61 @@ TWIG_DEBUG = false
 TWIG_AUTO_RELOAD = true
 TWIG_STRICT_VARIABLES = false
 ```
+### Extensions
+[`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) — provides a Equip specific extensions.
+
+| Variable   | Description                                                       |
+|------------|-------------------------------------------------------------------|
+| `session`  | Provides access to the instance of [`SessionInterface`](https://github.com/equip/framework/blob/master/docs/session.md#usage)           |
+*See the [session](https://github.com/equip/framework/blob/master/docs/session.md#usage) section in the documentationfor more details.*
+
+### Adding extensions
+The easiest way to add an extensions is by using the [`TwigExtensionSet`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigExtensionSet.php) as in the example below:
+```php
+// ...
+use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
+
+class ExtraTwigExtension extends TwigExtensionSet
+{
+    public function __construct()
+    {
+        parent::__construct([
+            AwesomeExtension::class,
+            AmazingExtension::class
+        ]);
+    }
+}
+```
+```php
+Equip\Application::build()
+->setConfiguration([
+    // ...
+    Asmaster\EquipTwig\Configuration\TwigResponderConfiguration::class,
+    Asmaster\EquipTwig\Configuration\TwigDefaultExtension,
+    Acme\Configuration\ExtraTwigExtension::class
+])
+// ...
+```
+It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](https://github.com/AlexMasterov/equip-twig/tree/master#setting-up-the-twig-environment):
+```php
+use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
+
+class TwigConfiguration implements ConfigurationInterface
+{
+   public function apply(Injector $injector)
+    {
+        // ...
+        $extensions = [
+            AwesomeExtension::class,
+            AmazingExtension::class
+        ]);
+
+        $injector->define(TwigDefaultExtension::class, [
+            ':extensions' => $extensions
+        ]);
+    }
+}
+```
 ## Usage
 Basic example:
 ```php
