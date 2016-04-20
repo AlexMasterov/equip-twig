@@ -13,11 +13,13 @@ class TwigDefaultExtension extends TwigExtensionSet
      */
     public function __construct(array $extensions = [])
     {
+        $defaults = [];
+
         // equip/session
         if (interface_exists(SessionInterface::class)) {
-            $extensions[] = SessionExtension::class;
+            $defaults[] = SessionExtension::class;
         }
 
-        parent::__construct($extensions);
+        parent::__construct(array_merge($defaults, $extensions));
     }
 }
