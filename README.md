@@ -77,13 +77,14 @@ TWIG_STRICT_VARIABLES = false
 
 | Variable   | Description                                                       |
 |------------|-------------------------------------------------------------------|
-| `session`  | Provides access to the instance of [`SessionInterface`](https://github.com/equip/framework/blob/master/docs/session.md#usage)           |
-*See the [session](https://github.com/equip/framework/blob/master/docs/session.md#usage) section in the documentationfor more details.*
+| [`session`](https://github.com/equip/framework/blob/master/docs/session.md#usage) | Provides access to an object instance of [`SessionInterface`]( https://github.com/equip/session/blob/master/src/SessionInterface.php)
 
 ### Adding extensions
 The easiest way to add an extensions is by using the [`TwigExtensionSet`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigExtensionSet.php) as in the example below:
 ```php
-// ...
+// src/Configuration/ExtraTwigExtension.php
+namespace Acme\Configuration;
+
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 
 class ExtraTwigExtension extends TwigExtensionSet
@@ -107,8 +108,9 @@ Equip\Application::build()
 ])
 // ...
 ```
-It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](https://github.com/AlexMasterov/equip-twig/tree/master#setting-up-the-twig-environment):
+It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](#setting-up-the-twig-environment):
 ```php
+// ...
 use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 
 class TwigConfiguration implements ConfigurationInterface
@@ -119,7 +121,7 @@ class TwigConfiguration implements ConfigurationInterface
         $extensions = [
             AwesomeExtension::class,
             AmazingExtension::class
-        ]);
+        ];
 
         $injector->define(TwigDefaultExtension::class, [
             ':extensions' => $extensions
@@ -133,6 +135,7 @@ Basic example:
 namespace Acme\Domain;
 
 use Equip\Adr\DomainInterface;
+use Equip\Adr\PayloadInterface;
 
 class WidgetDomain implements DomainInterface
 {
@@ -149,7 +152,7 @@ class WidgetDomain implements DomainInterface
     public function __invoke(array $input)
     {
         return $this->payload
-            ->withStatus(PayloadInterface::OK)
+            ->withStatus(PayloadInterface::STATUS_OK)
             ->withOutput([
                 'template' => 'widget.html.twig',
                 'message' => 'Just do it!'
