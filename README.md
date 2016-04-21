@@ -86,15 +86,19 @@ The easiest way to add an extensions is by using the [`TwigExtensionSet`](https:
 namespace Acme\Configuration;
 
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
+use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 
 class ExtraTwigExtension extends TwigExtensionSet
 {
     public function __construct()
     {
-        parent::__construct([
+        $defaults = (new TwigDefaultExtension)->toArray();
+        $extra = [
             AwesomeExtension::class,
             AmazingExtension::class
-        ]);
+        ];
+
+        parent::__construct(array_merge($defaults, $extra));
     }
 }
 ```
@@ -103,7 +107,6 @@ Equip\Application::build()
 ->setConfiguration([
     // ...
     Asmaster\EquipTwig\Configuration\TwigResponderConfiguration::class,
-    Asmaster\EquipTwig\Configuration\TwigDefaultExtension,
     Acme\Configuration\ExtraTwigExtension::class
 ])
 // ...
