@@ -41,10 +41,10 @@ class TwigResponderConfiguration implements ConfigurationInterface
         $env = $this->env;
 
         $options = [
-            'debug'            => $env->getValue('TWIG_DEBUG') ?: false,
-            'auto_reload'      => $env->getValue('TWIG_AUTO_RELOAD') ?: true,
-            'strict_variables' => $env->getValue('TWIG_STRICT_VARIABLES') ?: false,
-            'cache'            => $env->getValue('TWIG_CACHE') ?: false
+            'debug'            => $env->getValue('TWIG_DEBUG', false),
+            'auto_reload'      => $env->getValue('TWIG_AUTO_RELOAD', true),
+            'strict_variables' => $env->getValue('TWIG_STRICT_VARIABLES', false),
+            'cache'            => $env->getValue('TWIG_CACHE', false)
         ];
 
         return $options;
