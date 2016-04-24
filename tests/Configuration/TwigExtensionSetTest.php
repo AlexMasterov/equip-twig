@@ -8,6 +8,7 @@ use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 use Twig_Environment as TwigEnvironment;
+use Twig_Extension_Debug as TwigExtensionDebug;
 
 class TwigExtensionSetTest extends TestCase 
 {
@@ -26,10 +27,19 @@ class TwigExtensionSetTest extends TestCase
             ':options' => ['debug' => true]
         ]);
 
-        $extensionSet = new TwigExtensionSet();
+        $extensionSet = new TwigExtensionSet([TwigExtensionDebug::class]);
         $extensionSet->apply($injector);
 
         $twig = $injector->make(TwigEnvironment::class);
         $this->assertArrayHasKey('debug', $twig->getExtensions());
+    }
+
+    /**
+     * @expectedException \Asmaster\EquipTwig\Exception\ExtensionException
+     * @expectedExceptionRegExp /Twig extension *. must implement Twig_ExtensionInterface/i
+     */
+    public function testInvalidExtension()
+    {
+        new TwigExtensionSet([new \stdClass]);
     }
 }
