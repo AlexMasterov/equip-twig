@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig\tests\Traits;
+namespace Asmaster\EquipTwig\Tests\Traits;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Equip\Adr\PayloadInterface;

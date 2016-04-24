@@ -6,8 +6,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Equip\Adr\PayloadInterface;
 use Asmaster\EquipTwig\TwigFormatter;
 use Lukasoppermann\Httpstatus\Httpstatus;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
+use Twig_Environment as TwigEnvironment;
+use Twig_Loader_Filesystem as TwigLoaderFilesystem;
 
 class TwigFormatterTest extends TestCase
 {
@@ -18,8 +18,8 @@ class TwigFormatterTest extends TestCase
 
     public function setUp()
     {
-        $loader = new Twig_Loader_Filesystem(__DIR__.'/Asset/templates');
-        $twig = new Twig_Environment($loader);
+        $loader = new TwigLoaderFilesystem(__DIR__.'/Asset/templates');
+        $twig = new TwigEnvironment($loader);
 
         $this->formatter = new TwigFormatter($twig, new HttpStatus);
     }

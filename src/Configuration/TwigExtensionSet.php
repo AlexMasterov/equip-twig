@@ -5,8 +5,8 @@ namespace Asmaster\EquipTwig\Configuration;
 use Auryn\Injector;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
-use Twig_Environment;
-use Twig_Extension_Debug;
+use Twig_Environment as TwigEnvironment;
+use Twig_Extension_Debug as TwigExtensionDebug;
 
 class TwigExtensionSet extends Set implements ConfigurationInterface
 {
@@ -15,19 +15,19 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
      */
     public function apply(Injector $injector)
     {
-        $injector->prepare(Twig_Environment::class, [$this, 'prepareExtension']);
+        $injector->prepare(TwigEnvironment::class, [$this, 'prepareExtension']);
     }
 
     /**
-     * @param Twig_Environment $environment
+     * @param TwigEnvironment  $environment
      * @param Injector         $injector
      */
-    public function prepareExtension(Twig_Environment $environment, Injector $injector)
+    public function prepareExtension(TwigEnvironment $environment, Injector $injector)
     {
         $extensions = $this->toArray();
 
         if ($environment->isDebug()) {
-            $extensions[] = Twig_Extension_Debug::class;
+            $extensions[] = TwigExtensionDebug::class;
         }
 
         foreach ($extensions as $extension) {

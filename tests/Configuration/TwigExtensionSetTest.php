@@ -4,10 +4,10 @@ namespace Asmaster\EquipTwig\Tests\Configuration;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Auryn\Injector;
-use Twig_Environment;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
+use Twig_Environment as TwigEnvironment;
 
 class TwigExtensionSetTest extends TestCase 
 {
@@ -22,14 +22,14 @@ class TwigExtensionSetTest extends TestCase
     public function testApply()
     {
         $injector = new Injector();
-        $injector->define(Twig_Environment::class, [
+        $injector->define(TwigEnvironment::class, [
             ':options' => ['debug' => true]
         ]);
 
         $extensionSet = new TwigExtensionSet();
         $extensionSet->apply($injector);
 
-        $twig = $injector->make(Twig_Environment::class);
+        $twig = $injector->make(TwigEnvironment::class);
         $this->assertArrayHasKey('debug', $twig->getExtensions());
     }
 }
