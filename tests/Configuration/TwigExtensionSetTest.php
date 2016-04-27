@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Auryn\Injector;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
+use Asmaster\EquipTwig\Exception\ExtensionException;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 use Twig_Environment as TwigEnvironment;
 use Twig_Extension_Debug as TwigExtensionDebug;
@@ -27,19 +28,17 @@ class TwigExtensionSetTest extends TestCase
             ':options' => ['debug' => true]
         ]);
 
-        $extensionSet = new TwigExtensionSet([TwigExtensionDebug::class]);
+        $extensionSet = new TwigExtensionSet();
         $extensionSet->apply($injector);
 
         $twig = $injector->make(TwigEnvironment::class);
         $this->assertArrayHasKey('debug', $twig->getExtensions());
     }
 
-    /**
-     * @expectedException \Asmaster\EquipTwig\Exception\ExtensionException
-     * @expectedExceptionRegExp /Twig extension *. must implement Twig_ExtensionInterface/i
-     */
     public function testInvalidExtension()
     {
+        $this->expectException(ExtensionException::class);
+
         new TwigExtensionSet([new \stdClass]);
     }
 }

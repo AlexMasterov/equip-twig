@@ -6,9 +6,9 @@ use Auryn\Injector;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
 use Asmaster\EquipTwig\Exception\ExtensionException;
-use Twig_ExtensionInterface;
 use Twig_Environment as TwigEnvironment;
 use Twig_Extension_Debug as TwigExtensionDebug;
+use Twig_ExtensionInterface as TwigExtensionInterface;
 
 class TwigExtensionSet extends Set implements ConfigurationInterface
 {
@@ -42,6 +42,8 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
     }
 
     /**
+     * @param array $extensions
+     *
      * @throws ExtensionException::invalidExtension
      */
     protected function assertValid(array $extensions)
@@ -49,7 +51,7 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
         parent::assertValid($extensions);
 
         foreach ($extensions as $extension) {
-            if (!is_subclass_of($extension, Twig_ExtensionInterface::class)) {
+            if (!is_subclass_of($extension, TwigExtensionInterface::class)) {
                 throw ExtensionException::invalidExtension($extension);
             }
         }
