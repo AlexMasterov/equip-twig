@@ -19,7 +19,7 @@ class TwigResponderConfiguration implements ConfigurationInterface
      */
     public function apply(Injector $injector)
     {
-        $injector->prepare(FormattedResponder::class, function (FormattedResponder $responder) {
+        $injector->prepare(FormattedResponder::class, function(FormattedResponder $responder) {
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
 
