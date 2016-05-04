@@ -2,10 +2,10 @@
 
 namespace Asmaster\EquipTwig\Tests;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Equip\Adr\PayloadInterface;
 use Asmaster\EquipTwig\TwigFormatter;
+use Equip\Adr\PayloadInterface;
 use Lukasoppermann\Httpstatus\Httpstatus;
+use PHPUnit_Framework_TestCase as TestCase;
 use Twig_Environment as TwigEnvironment;
 use Twig_Loader_Filesystem as TwigLoaderFilesystem;
 

@@ -2,9 +2,9 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
-use Equip\SessionInterface;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
 use Asmaster\EquipTwig\Extension\SessionExtension;
+use Equip\SessionInterface;
 
 class TwigDefaultExtension extends TwigExtensionSet
 {

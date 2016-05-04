@@ -2,9 +2,9 @@
 
 namespace Asmaster\EquipTwig\Tests\Traits;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Equip\Adr\PayloadInterface;
 use Asmaster\EquipTwig\Traits\PayloadRenderTrait;
+use Equip\Adr\PayloadInterface;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class PayloadRenderTraitTest extends TestCase
 {

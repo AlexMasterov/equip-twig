@@ -4,8 +4,8 @@ namespace Asmaster\EquipTwig;
 
 use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;
-use Twig_Environment as TwigEnvironment;
 use Lukasoppermann\Httpstatus\Httpstatus;
+use Twig_Environment as TwigEnvironment;
 
 class TwigFormatter extends HtmlFormatter
 {

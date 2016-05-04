@@ -2,12 +2,12 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use Auryn\Injector;
-use Equip\Configuration\AurynConfiguration;
-use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
 use Asmaster\EquipTwig\Configuration\TwigResponderConfiguration;
+use Equip\Configuration\AurynConfiguration;
+use Equip\Responder\FormattedResponder;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class TwigResponderConfigurationTest extends TestCase
 {

@@ -3,9 +3,9 @@
 namespace Asmaster\EquipTwig\Configuration;
 
 use Auryn\Injector;
+use Asmaster\EquipTwig\Exception\ExtensionException;
 use Equip\Structure\Set;
 use Equip\Configuration\ConfigurationInterface;
-use Asmaster\EquipTwig\Exception\ExtensionException;
 use Twig_Environment as TwigEnvironment;
 use Twig_Extension_Debug as TwigExtensionDebug;
 use Twig_ExtensionInterface as TwigExtensionInterface;
