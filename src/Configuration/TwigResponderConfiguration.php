@@ -2,11 +2,11 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
-use Auryn\Injector;
-use Equip\Configuration\EnvTrait;
-use Equip\Configuration\ConfigurationInterface;
-use Equip\Responder\FormattedResponder;
 use Asmaster\EquipTwig\TwigFormatter;
+use Auryn\Injector;
+use Equip\Configuration\ConfigurationInterface;
+use Equip\Configuration\EnvTrait;
+use Equip\Responder\FormattedResponder;
 use Twig_Environment as TwigEnvironment;
 use Twig_Loader_Filesystem as TwigLoaderFilesystem;
 

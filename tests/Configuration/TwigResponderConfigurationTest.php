@@ -2,9 +2,9 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use Auryn\Injector;
-use Asmaster\EquipTwig\TwigFormatter;
 use Asmaster\EquipTwig\Configuration\TwigResponderConfiguration;
+use Asmaster\EquipTwig\TwigFormatter;
+use Auryn\Injector;
 use Equip\Configuration\AurynConfiguration;
 use Equip\Responder\FormattedResponder;
 use PHPUnit_Framework_TestCase as TestCase;

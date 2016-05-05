@@ -2,13 +2,13 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
-use Auryn\Injector;
 use Asmaster\EquipTwig\Exception\ExtensionException;
-use Equip\Structure\Set;
+use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
+use Equip\Structure\Set;
 use Twig_Environment as TwigEnvironment;
-use Twig_Extension_Debug as TwigExtensionDebug;
 use Twig_ExtensionInterface as TwigExtensionInterface;
+use Twig_Extension_Debug as TwigExtensionDebug;
 
 class TwigExtensionSet extends Set implements ConfigurationInterface
 {

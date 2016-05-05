@@ -2,9 +2,9 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use Asmaster\EquipTwig\Tests\Asset\EmptyInterface;
 use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
 use Asmaster\EquipTwig\Extension\SessionExtension;
+use Asmaster\EquipTwig\Tests\Asset\EmptyInterface;
 use Equip\SessionInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 

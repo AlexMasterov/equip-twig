@@ -2,11 +2,11 @@
 
 namespace Asmaster\EquipTwig\Tests\Configuration;
 
-use Auryn\Injector;
-use Asmaster\EquipTwig\Exception\ExtensionException;
 use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
-use Equip\Structure\Set;
+use Asmaster\EquipTwig\Exception\ExtensionException;
+use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
+use Equip\Structure\Set;
 use PHPUnit_Framework_TestCase as TestCase;
 use Twig_Environment as TwigEnvironment;
 use Twig_Extension_Debug as TwigExtensionDebug;
