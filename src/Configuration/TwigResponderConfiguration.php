@@ -29,14 +29,14 @@ class TwigResponderConfiguration implements ConfigurationInterface
 
         $injector->define(TwigEnvironment::class, [
             'loader'   => TwigLoaderFilesystem::class,
-            ':options' => $this->getOptions()
+            ':options' => $this->getEnvOptions()
         ]);
     }
 
     /**
      * @return array $options
      */
-    public function getOptions()
+    public function getEnvOptions()
     {
         $env = $this->env;
 
