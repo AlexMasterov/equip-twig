@@ -3,6 +3,7 @@
 namespace Asmaster\EquipTwig\Exception;
 
 use InvalidArgumentException;
+use Twig_ExtensionInterface;
 
 class ExtensionException extends InvalidArgumentException
 {
@@ -18,8 +19,9 @@ class ExtensionException extends InvalidArgumentException
         }
 
         return new static(sprintf(
-            'Twig extension `%s` must implement Twig_ExtensionInterface',
-            $extension
+            'Twig extension `%s` must implement `%s`',
+            $extension,
+            Twig_ExtensionInterface::class
         ));
     }
 }
