@@ -15,10 +15,10 @@ trait PayloadRenderTrait
     }
 
     /**
-     * @param string $template
-     * @param array  $output
+     * @param string $template Template name
+     * @param array  $output   The output produced by the domain layer
      *
-     * @return Payload $payload
+     * @return Payload
      */
     protected function render($template, array $output = [])
     {

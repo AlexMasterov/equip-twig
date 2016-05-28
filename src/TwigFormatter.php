@@ -18,7 +18,10 @@ class TwigFormatter extends HtmlFormatter
      * @param TwigEnvironment  $environment
      * @param Httpstatus       $httpStatus
      */
-    public function __construct(TwigEnvironment $environment, Httpstatus $httpStatus)
+    public function __construct(
+        TwigEnvironment $environment,
+        Httpstatus $httpStatus
+    )
     {
         $this->environment = $environment;
         parent::__construct($httpStatus);
@@ -60,7 +63,7 @@ class TwigFormatter extends HtmlFormatter
     /**
      * @param PayloadInterface $payload
      *
-     * @return array $output
+     * @return array
      */
     protected function output(PayloadInterface $payload)
     {
