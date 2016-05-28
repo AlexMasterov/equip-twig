@@ -25,10 +25,7 @@
   "autoload": {
     "psr-4": {
       "Asmaster\\EquipTwig\\": "src/"
-    },
-    "exclude-from-classmap": [
-      "/tests/"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
