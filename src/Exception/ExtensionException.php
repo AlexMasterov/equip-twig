@@ -8,19 +8,19 @@ use Twig_ExtensionInterface as TwigExtensionInterface;
 class ExtensionException extends InvalidArgumentException
 {
     /**
-     * @param mixed $extension
+     * @param mixed $spec
      *
      * @return static
      */
-    public static function invalidExtension($extension)
+    public static function invalidExtension($spec)
     {
-        if (is_object($extension)) {
-            $extension = get_class($extension);
+        if (is_object($spec)) {
+            $spec = get_class($spec);
         }
 
         return new static(sprintf(
             'Twig extension `%s` must implement `%s`',
-            $extension,
+            $spec,
             TwigExtensionInterface::class
         ));
     }
