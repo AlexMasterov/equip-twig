@@ -2,12 +2,24 @@
 
 namespace Asmaster\EquipTwig\Extension;
 
+use Equip\SessionInterface;
 use Twig_Extension as TwigExtension;
 use Twig_Extension_GlobalsInterface as TwigExtensionGlobalsInterface;
 
 class SessionExtension extends TwigExtension implements TwigExtensionGlobalsInterface
 {
-    use SessionTrait;
+    /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
+     * @param SessionInterface $session
+     */
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
 
     /**
      * @return string The extension name
