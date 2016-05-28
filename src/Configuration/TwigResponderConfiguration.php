@@ -28,7 +28,7 @@ class TwigResponderConfiguration implements ConfigurationInterface
         ]);
 
         $injector->define(TwigEnvironment::class, [
-            ':loader'  => TwigLoaderFilesystem::class,
+            'loader'   => TwigLoaderFilesystem::class,
             ':options' => $this->getEnvOptions()
         ]);
     }
