@@ -156,8 +156,8 @@ class WidgetDomain implements DomainInterface
     {
         return $this->payload
             ->withStatus(PayloadInterface::STATUS_OK)
+            ->withSetting('template', 'widget.html.twig')
             ->withOutput([
-                'template' => 'widget.html.twig',
                 'message' => 'Just do it!'
             ]);
     }

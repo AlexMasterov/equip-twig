@@ -10,7 +10,7 @@ use Equip\Responder\FormattedResponder;
 use Twig_Environment as TwigEnvironment;
 use Twig_Loader_Filesystem as TwigLoaderFilesystem;
 
-class TwigResponderConfiguration implements ConfigurationInterface
+final class TwigResponderConfiguration implements ConfigurationInterface
 {
     use EnvTrait;
 

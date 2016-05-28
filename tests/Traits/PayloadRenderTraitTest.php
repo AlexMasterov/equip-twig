@@ -24,6 +24,6 @@ class PayloadRenderTraitTest extends TestCase
 
         $payload = $this->render($template, $output);
 
-        $this->assertEquals(compact('template') + $output, $payload->getOutput());
+        $this->assertEquals($output, $payload->getOutput());
     }
 }

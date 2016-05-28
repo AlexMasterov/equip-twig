@@ -24,6 +24,7 @@ trait PayloadRenderTrait
     {
         return $this->payload()
             ->withStatus(Payload::STATUS_OK)
-            ->withOutput(compact('template') + $output);
+            ->withSetting('template', $template)
+            ->withOutput($output);
     }
 }

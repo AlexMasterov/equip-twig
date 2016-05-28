@@ -6,7 +6,7 @@ use Equip\SessionInterface;
 use Twig_Extension as TwigExtension;
 use Twig_Extension_GlobalsInterface as TwigExtensionGlobalsInterface;
 
-class SessionExtension extends TwigExtension implements TwigExtensionGlobalsInterface
+final class SessionExtension extends TwigExtension implements TwigExtensionGlobalsInterface
 {
     /**
      * @var SessionInterface

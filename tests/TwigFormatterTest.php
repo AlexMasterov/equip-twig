@@ -38,19 +38,22 @@ class TwigFormatterTest extends TestCase
 
     public function testResponse()
     {
+        $template = 'test.html.twig';
         $output = [
-            'template' => 'test.html.twig',
-            'header'   => 'header',
-            'body'     => 'body',
-            'footer'   => 'footer'
+            'header' => 'header',
+            'body'   => 'body',
+            'footer' => 'footer'
         ];
 
         $payload = $this->getMock(PayloadInterface::class);
 
-        $payload
-            ->expects($this->any())
+        $payload->expects($this->any())
             ->method('getOutput')
-            ->will($this->returnValue($output));
+            ->willReturn($output);
+
+        $payload->expects($this->any())
+            ->method('getSetting')
+            ->willReturn($template);
 
         $body = $this->formatter->body($payload);
 

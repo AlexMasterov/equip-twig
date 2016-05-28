@@ -4,27 +4,21 @@ namespace Asmaster\EquipTwig;
 
 use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;
-use Lukasoppermann\Httpstatus\Httpstatus;
 use Twig_Environment as TwigEnvironment;
 
-class TwigFormatter extends HtmlFormatter
+final class TwigFormatter extends HtmlFormatter
 {
     /**
      * @var TwigEnvironment
      */
-    protected $environment;
+    private $environment;
 
     /**
-     * @param TwigEnvironment  $environment
-     * @param Httpstatus       $httpStatus
+     * @param TwigEnvironment $environment
      */
-    public function __construct(
-        TwigEnvironment $environment,
-        Httpstatus $httpStatus
-    )
+    public function __construct(TwigEnvironment $environment)
     {
         $this->environment = $environment;
-        parent::__construct($httpStatus);
     }
 
     /**
@@ -42,34 +36,11 @@ class TwigFormatter extends HtmlFormatter
      *
      * @return string
      */
-    protected function render(PayloadInterface $payload)
+    private function render(PayloadInterface $payload)
     {
-        $template = $this->template($payload);
-        $output = $this->output($payload);
+        $template = $payload->getSetting('template');
+        $output = $payload->getOutput();
 
         return $this->environment->render($template, $output);
-    }
-
-    /**
-     * @param PayloadInterface $payload
-     *
-     * @return string Template name
-     */
-    protected function template(PayloadInterface $payload)
-    {
-        return $payload->getOutput()['template'];
-    }
-
-    /**
-     * @param PayloadInterface $payload
-     *
-     * @return array
-     */
-    protected function output(PayloadInterface $payload)
-    {
-        $output = $payload->getOutput();
-        unset($output['template']);
-
-        return $output;
     }
 }
