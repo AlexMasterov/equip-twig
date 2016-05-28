@@ -17,12 +17,13 @@ class PayloadRenderTraitTest extends TestCase
 
     public function testPayloadRender()
     {
+        $template = 'test.html.twig';
         $output = [
-            'template' => 'index.html.twig',
-            ['body' => 'body']
+            'body' => 'body'
         ];
 
-        $payload = $this->render($output['template'], $output);
-        $this->assertEquals($output, $payload->getOutput());
+        $payload = $this->render($template, $output);
+
+        $this->assertEquals(compact('template') + $output, $payload->getOutput());
     }
 }

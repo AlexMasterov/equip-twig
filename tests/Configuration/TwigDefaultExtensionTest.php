@@ -10,7 +10,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class TwigDefaultExtensionTest extends TestCase
 {
-    public function setUp()
+    protected function setUp()
     {
         if (!interface_exists(SessionInterface::class)) {
             class_alias(
@@ -27,6 +27,7 @@ class TwigDefaultExtensionTest extends TestCase
         ];
 
         $extensions = new TwigDefaultExtension();
+
         $this->assertSame($defaults, $extensions->toArray());
     }
 }

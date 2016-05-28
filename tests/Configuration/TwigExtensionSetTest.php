@@ -25,13 +25,16 @@ class TwigExtensionSetTest extends TestCase
     {
         $injector = new Injector();
         $injector->define(TwigEnvironment::class, [
-            ':options' => ['debug' => true]
+            ':options' => [
+                'debug' => true
+            ]
         ]);
 
         $extensionSet = new TwigExtensionSet();
         $extensionSet->apply($injector);
 
         $twig = $injector->make(TwigEnvironment::class);
+
         $this->assertArrayHasKey('debug', $twig->getExtensions());
     }
 
