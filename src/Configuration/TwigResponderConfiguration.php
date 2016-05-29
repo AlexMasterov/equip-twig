@@ -2,13 +2,13 @@
 
 namespace Asmaster\EquipTwig\Configuration;
 
+use Asmaster\EquipTwig\Loader\FilesystemLoader;
 use Asmaster\EquipTwig\TwigFormatter;
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Configuration\EnvTrait;
 use Equip\Responder\FormattedResponder;
 use Twig_Environment as TwigEnvironment;
-use Twig_Loader_Filesystem as TwigLoaderFilesystem;
 
 final class TwigResponderConfiguration implements ConfigurationInterface
 {
@@ -23,14 +23,29 @@ final class TwigResponderConfiguration implements ConfigurationInterface
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
 
-        $injector->define(TwigLoaderFilesystem::class, [
-            ':paths' => $this->env->getValue('TWIG_TEMPLATES')
+        $injector->define(FilesystemLoader::class, [
+            ':path'           => $this->env->getValue('TWIG_TEMPLATES'),
+            ':fileExtensions' => $this->getEnvfileExtensions()
         ]);
 
         $injector->define(TwigEnvironment::class, [
-            'loader'   => TwigLoaderFilesystem::class,
+            'loader'   => FilesystemLoader::class,
             ':options' => $this->getEnvOptions()
         ]);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getEnvfileExtensions()
+    {
+        $fileExtensions = $this->env->getValue('TWIG_FILE_EXTENSIONS');
+
+        if (is_string($fileExtensions)) {
+            $fileExtensions = explode(',', $fileExtensions);
+        }
+
+        return $fileExtensions;
     }
 
     /**

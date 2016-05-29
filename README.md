@@ -46,7 +46,8 @@ class TwigConfiguration implements ConfigurationInterface
                 'TWIG_CACHE'            => __DIR__.'/../../var/cache/twig',
                 'TWIG_DEBUG'            => false,
                 'TWIG_AUTO_RELOAD'      => true,
-                'TWIG_STRICT_VARIABLES' => false
+                'TWIG_STRICT_VARIABLES' => false,
+                'TWIG_FILE_EXTENSIONS' => 'html.twig,twig'
             ]);
 
         $injector->define(TwigResponderConfiguration::class, [
