@@ -2,6 +2,8 @@
 
 namespace Asmaster\EquipTwig\Traits;
 
+use Equip\Adr\PayloadInterface;
+
 trait PayloadInterfaceRenderTrait
 {
     /**
