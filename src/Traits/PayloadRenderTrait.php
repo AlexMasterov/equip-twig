@@ -15,7 +15,7 @@ trait PayloadRenderTrait
     }
 
     /**
-     * @param string $template Template name
+     * @param string $template The template name
      * @param array  $output   The output produced by the domain layer
      *
      * @return Payload
