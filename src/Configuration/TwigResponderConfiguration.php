@@ -25,7 +25,7 @@ final class TwigResponderConfiguration implements ConfigurationInterface
 
         $injector->define(FilesystemLoader::class, [
             ':path'           => $this->env->getValue('TWIG_TEMPLATES'),
-            ':fileExtensions' => $this->getEnvfileExtensions()
+            ':fileExtensions' => $this->getEnvFileExtensions()
         ]);
 
         $injector->define(TwigEnvironment::class, [
@@ -37,7 +37,7 @@ final class TwigResponderConfiguration implements ConfigurationInterface
     /**
      * @return array|null
      */
-    public function getEnvfileExtensions()
+    public function getEnvFileExtensions()
     {
         $fileExtensions = $this->env->getValue('TWIG_FILE_EXTENSIONS');
 
