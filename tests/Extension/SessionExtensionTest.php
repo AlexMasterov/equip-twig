@@ -11,11 +11,12 @@ class SessionExtensionTest extends TestCase
 {
     public function testExtension()
     {
-        $session = $this->getMock(SessionInterface::class);
-        $extension = new SessionExtension($session);
+        $extension = new SessionExtension(
+            $this->getMock(SessionInterface::class)
+        );
 
-        $this->assertInstanceOf(TwigExtensionInterface::class, $extension);
         $this->assertSame('equip_session', $extension->getName());
+        $this->assertInstanceOf(TwigExtensionInterface::class, $extension);
 
         $this->assertArrayHasKey('session', $extension->getGlobals());
         $this->assertInstanceOf(SessionInterface::class, $extension->getGlobals()['session']);

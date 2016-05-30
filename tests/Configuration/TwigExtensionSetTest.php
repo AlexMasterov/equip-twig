@@ -17,6 +17,7 @@ class TwigExtensionSetTest extends TestCase
     {
         $defaultExtension = new TwigExtensionSet();
 
+        $this->assertInstanceOf(TwigExtensionSet::class, $defaultExtension);
         $this->assertInstanceOf(Set::class, $defaultExtension);
         $this->assertInstanceOf(ConfigurationInterface::class, $defaultExtension);
     }
@@ -25,9 +26,7 @@ class TwigExtensionSetTest extends TestCase
     {
         $injector = new Injector();
         $injector->define(TwigEnvironment::class, [
-            ':options' => [
-                'debug' => true
-            ]
+            ':options' => ['debug' => true]
         ]);
 
         $extensionSet = new TwigExtensionSet();

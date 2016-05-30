@@ -8,9 +8,9 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class FilesystemLoaderTest extends TestCase
 {
-    public function testEmptyConstructor()
+    public function testConstructor()
     {
-        $path = '/templates';
+        $path = __DIR__;
         $fileExtensions = ['html.twig'];
 
         $loader = new FilesystemLoader(
@@ -18,8 +18,16 @@ class FilesystemLoaderTest extends TestCase
             $fileExtensions
         );
 
-        $this->assertEquals($path, $loader->getPath());
-        $this->assertEquals($fileExtensions, $loader->getFileExtensions());
+        $class = new \ReflectionClass($loader);
+
+        $propPath = $class->getProperty('path');
+        $propPath->setAccessible(true);
+
+        $propFileExtensions = $class->getProperty('fileExtensions');
+        $propFileExtensions->setAccessible(true);
+
+        $this->assertEquals($path, $propPath->getValue($loader));
+        $this->assertEquals($fileExtensions, $propFileExtensions->getValue($loader));
     }
 
     public function testGetSource()
@@ -41,8 +49,9 @@ class FilesystemLoaderTest extends TestCase
         $realPath = realpath($path . DIRECTORY_SEPARATOR . $template);
 
         $loader = new FilesystemLoader($path);
+        $loader->getSource($template);
+
         $cacheKey = $loader->getCacheKey($template);
-        $source = $loader->getSource($template);
 
         $this->assertEquals($realPath, $cacheKey);
     }
@@ -68,7 +77,8 @@ class FilesystemLoaderTest extends TestCase
         $this->assertTrue($exists);
 
         $loader = new FilesystemLoader($path);
-        $source = $loader->getSource($template);
+        $loader->getSource($template);
+
         $exists = $loader->exists($template);
 
         $this->assertTrue($exists);

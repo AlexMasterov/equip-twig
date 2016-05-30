@@ -44,14 +44,8 @@ class TwigFormatterTest extends TestCase
         ];
 
         $payload = $this->getMock(PayloadInterface::class);
-
-        $payload->expects($this->any())
-            ->method('getOutput')
-            ->willReturn($output);
-
-        $payload->expects($this->any())
-            ->method('getSetting')
-            ->willReturn($template);
+        $payload->expects($this->any())->method('getOutput')->willReturn($output);
+        $payload->expects($this->any())->method('getSetting')->willReturn($template);
 
         $body = $this->formatter->body($payload);
 
