@@ -73,27 +73,12 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
     }
 
     /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return array
-     */
-    public function getFileExtensions()
-    {
-        return $this->fileExtensions;
-    }
-
-    /**
-     * @throws LoaderException When $name is not found
-     *
      * @param string $name
      *
      * @return string
+     *
+     * @throws LoaderException
+     * When $name is not found
      */
     private function template($name)
     {
