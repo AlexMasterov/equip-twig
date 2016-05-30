@@ -2,9 +2,10 @@
 
 namespace Asmaster\EquipTwig\Exception;
 
+use Asmaster\EquipTwig\Exception\ExceptionInterface;
 use Twig_Error_Loader as TwigErrorLoader;
 
-class LoaderException extends TwigErrorLoader
+class LoaderException extends TwigErrorLoader implements ExceptionInterface
 {
     /**
      * @param string $name  The template name
@@ -21,4 +22,3 @@ class LoaderException extends TwigErrorLoader
         ));
     }
 }
-

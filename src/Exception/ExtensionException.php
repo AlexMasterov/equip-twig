@@ -2,10 +2,11 @@
 
 namespace Asmaster\EquipTwig\Exception;
 
+use Asmaster\EquipTwig\Exception\ExceptionInterface;
 use InvalidArgumentException;
 use Twig_ExtensionInterface as TwigExtensionInterface;
 
-class ExtensionException extends InvalidArgumentException
+class ExtensionException extends InvalidArgumentException implements ExceptionInterface
 {
     /**
      * @param mixed $spec
