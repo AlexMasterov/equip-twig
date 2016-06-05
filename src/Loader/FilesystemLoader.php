@@ -78,7 +78,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
      * @return string
      *
      * @throws LoaderException
-     * When $name is not found
+     *  When $name is not found
      */
     private function template($name)
     {
@@ -105,7 +105,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
 
         foreach($files as $file) {
             $filepath = $this->path . DIRECTORY_SEPARATOR . $file;
-            if (is_readable($filepath)) {
+            if (is_file($filepath) && is_readable($filepath)) {
                 return realpath($filepath);
             }
         }
