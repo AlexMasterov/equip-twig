@@ -7,15 +7,16 @@ use Asmaster\EquipTwig\Exception\ExtensionException;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 use Twig_ExtensionInterface as TwigExtensionInterface;
+use stdClass;
 
 class ExtensionExceptionTest extends TestCase
 {
     public function testInvalidExtension()
     {
-        $extension = new \stdClass();
+        $extension = new stdClass;
         $interface = TwigExtensionInterface::class;
 
-        $exception = ExtensionException::invalidExtension($extension);
+        $exception = ExtensionException::invalidClass($extension);
 
         $this->assertInstanceOf(ExtensionException::class, $exception);
         $this->assertInstanceOf(InvalidArgumentException::class, $exception);

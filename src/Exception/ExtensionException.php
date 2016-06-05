@@ -9,11 +9,11 @@ use Twig_ExtensionInterface as TwigExtensionInterface;
 class ExtensionException extends InvalidArgumentException implements ExceptionInterface
 {
     /**
-     * @param mixed $spec
+     * @param string|object $spec
      *
      * @return static
      */
-    public static function invalidExtension($spec)
+    public static function invalidClass($spec)
     {
         if (is_object($spec)) {
             $spec = get_class($spec);

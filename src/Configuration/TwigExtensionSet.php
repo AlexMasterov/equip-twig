@@ -38,23 +38,23 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
             if (!is_object($extension)) {
                 $extension = $injector->make($extension);
             }
-
             $environment->addExtension($extension);
         }
     }
 
     /**
-     * @param array $extensions
+     * @inheritDoc
      *
-     * @throws ExtensionException::invalidExtension
+     * @throws ExtensionException
+     *  If $classes does not implement the correct interface.
      */
-    protected function assertValid(array $extensions)
+    protected function assertValid(array $classes)
     {
-        parent::assertValid($extensions);
+        parent::assertValid($classes);
 
-        foreach ($extensions as $extension) {
+        foreach ($classes as $extension) {
             if (!is_subclass_of($extension, TwigExtensionInterface::class)) {
-                throw ExtensionException::invalidExtension($extension);
+                throw ExtensionException::invalidClass($extension);
             }
         }
     }
