@@ -16,7 +16,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
     /**
      * @var array
      */
-    private $fileExtensions = ['html.twig', 'twig'];
+    private $fileExtensions = [];
 
     /**
      * @var array
@@ -27,13 +27,12 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
      * @param string $path           The template directory path
      * @param array  $fileExtensions The template file extensions
      */
-    public function __construct($path, array $fileExtensions = null)
-    {
+    public function __construct(
+        $path,
+        array $fileExtensions = ['html.twig', 'twig']
+    ) {
         $this->path = $path;
-
-        if ($fileExtensions) {
-            $this->fileExtensions = $fileExtensions;
-        }
+        $this->fileExtensions = $fileExtensions;
     }
 
     /**
