@@ -124,7 +124,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
 
         $templates = [$name];
         foreach($this->fileExtensions as $extension) {
-            $templates[] = "$name.$extension";
+            $templates[] = "{$name}.{$extension}";
         }
 
         return $templates;
