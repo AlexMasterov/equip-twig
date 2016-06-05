@@ -12,7 +12,7 @@ class SessionExtensionTest extends TestCase
     public function testExtension()
     {
         $extension = new SessionExtension(
-            $this->getMock(SessionInterface::class)
+            $this->createMock(SessionInterface::class)
         );
 
         $this->assertSame('equip_session', $extension->getName());

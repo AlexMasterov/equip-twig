@@ -43,7 +43,7 @@ class TwigFormatterTest extends TestCase
             'footer' => 'footer'
         ];
 
-        $payload = $this->getMock(PayloadInterface::class);
+        $payload = $this->createMock(PayloadInterface::class);
         $payload->expects($this->any())->method('getOutput')->willReturn($output);
         $payload->expects($this->any())->method('getSetting')->willReturn($template);
 
