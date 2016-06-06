@@ -35,11 +35,11 @@ final class TwigResponderConfiguration implements ConfigurationInterface
     }
 
     /**
-     * @return array|null
+     * @return array
      */
     public function getEnvFileExtensions()
     {
-        $fileExtensions = $this->env->getValue('TWIG_FILE_EXTENSIONS');
+        $fileExtensions = $this->env->getValue('TWIG_FILE_EXTENSIONS', ['html.twig', 'twig']);
 
         if (is_string($fileExtensions)) {
             $fileExtensions = explode(',', $fileExtensions);
