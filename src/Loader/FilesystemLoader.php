@@ -77,7 +77,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
      * @return string
      *
      * @throws LoaderException
-     *  When $name is not found
+     *  When $name is not found.
      */
     private function template($name)
     {
@@ -86,7 +86,7 @@ final class FilesystemLoader implements TwigLoader, TwigExistsLoader
         }
 
         $found = $this->findTemplate($name);
-        if (!$found) {
+        if (null === $found) {
             throw LoaderException::notFound($name, $this->path);
         }
 
