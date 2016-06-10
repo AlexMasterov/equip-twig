@@ -22,7 +22,7 @@ final class TwigFormatter extends HtmlFormatter
     }
 
     /**
-     * @param TemplatePayload $payload
+     * @param PayloadInterface $payload
      *
      * @return string
      */
