@@ -8,7 +8,7 @@ use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Configuration\EnvTrait;
 use Equip\Responder\FormattedResponder;
-use Twig_Environment as TwigEnvironment;
+use Twig_Environment;
 
 final class TwigResponderConfiguration implements ConfigurationInterface
 {
@@ -28,7 +28,7 @@ final class TwigResponderConfiguration implements ConfigurationInterface
             ':fileExtensions' => $this->getEnvFileExtensions()
         ]);
 
-        $injector->define(TwigEnvironment::class, [
+        $injector->define(Twig_Environment::class, [
             'loader'   => FilesystemLoader::class,
             ':options' => $this->getEnvOptions()
         ]);

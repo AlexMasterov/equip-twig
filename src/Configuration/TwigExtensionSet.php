@@ -6,9 +6,9 @@ use Asmaster\EquipTwig\Exception\ExtensionException;
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Structure\Set;
-use Twig_Environment as TwigEnvironment;
-use Twig_ExtensionInterface as TwigExtensionInterface;
-use Twig_Extension_Debug as TwigExtensionDebug;
+use Twig_Environment;
+use Twig_ExtensionInterface;
+use Twig_Extension_Debug;
 
 class TwigExtensionSet extends Set implements ConfigurationInterface
 {
@@ -17,21 +17,21 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
      */
     public function apply(Injector $injector)
     {
-        $injector->prepare(TwigEnvironment::class, [$this, 'prepareExtension']);
+        $injector->prepare(Twig_Environment::class, [$this, 'prepareExtension']);
     }
 
     /**
-     * @param TwigEnvironment  $environment
-     * @param Injector         $injector
+     * @param Twig_Environment  $environment
+     * @param Injector          $injector
      *
      * @return void
      */
-    public function prepareExtension(TwigEnvironment $environment, Injector $injector)
+    public function prepareExtension(Twig_Environment $environment, Injector $injector)
     {
         $extensions = $this->toArray();
 
         if ($environment->isDebug()) {
-            $extensions[] = TwigExtensionDebug::class;
+            $extensions[] = Twig_Extension_Debug::class;
         }
 
         foreach ($extensions as $extension) {
@@ -53,7 +53,7 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
         parent::assertValid($classes);
 
         foreach ($classes as $extension) {
-            if (!is_subclass_of($extension, TwigExtensionInterface::class)) {
+            if (!is_subclass_of($extension, Twig_ExtensionInterface::class)) {
                 throw ExtensionException::invalidClass($extension);
             }
         }

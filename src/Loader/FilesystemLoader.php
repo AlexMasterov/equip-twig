@@ -3,10 +3,10 @@
 namespace Asmaster\EquipTwig\Loader;
 
 use Asmaster\EquipTwig\Exception\LoaderException;
-use Twig_ExistsLoaderInterface as TwigExistsLoader;
-use Twig_LoaderInterface as TwigLoader;
+use Twig_ExistsLoaderInterface;
+use Twig_LoaderInterface;
 
-final class FilesystemLoader implements TwigLoader, TwigExistsLoader
+final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface
 {
     /**
      * @var string

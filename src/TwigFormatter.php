@@ -4,19 +4,19 @@ namespace Asmaster\EquipTwig;
 
 use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;
-use Twig_Environment as TwigEnvironment;
+use Twig_Environment;
 
 final class TwigFormatter extends HtmlFormatter
 {
     /**
-     * @var TwigEnvironment
+     * @var Twig_Environment
      */
     private $environment;
 
     /**
-     * @param TwigEnvironment $environment
+     * @param Twig_Environment $environment
      */
-    public function __construct(TwigEnvironment $environment)
+    public function __construct(Twig_Environment $environment)
     {
         $this->environment = $environment;
     }

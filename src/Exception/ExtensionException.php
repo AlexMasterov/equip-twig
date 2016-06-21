@@ -4,7 +4,7 @@ namespace Asmaster\EquipTwig\Exception;
 
 use Asmaster\EquipTwig\Exception\ExceptionInterface;
 use InvalidArgumentException;
-use Twig_ExtensionInterface as TwigExtensionInterface;
+use Twig_ExtensionInterface;
 
 class ExtensionException extends InvalidArgumentException implements ExceptionInterface
 {
@@ -22,7 +22,7 @@ class ExtensionException extends InvalidArgumentException implements ExceptionIn
         return new static(sprintf(
             'Twig extension `%s` must implement `%s`',
             $spec,
-            TwigExtensionInterface::class
+            Twig_ExtensionInterface::class
         ));
     }
 }
