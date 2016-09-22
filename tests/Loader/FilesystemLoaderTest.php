@@ -1,9 +1,9 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Loader;
+namespace AlexMasterov\EquipTwig\Tests\Loader;
 
-use Asmaster\EquipTwig\Exception\LoaderException;
-use Asmaster\EquipTwig\Loader\FilesystemLoader;
+use AlexMasterov\EquipTwig\Exception\LoaderException;
+use AlexMasterov\EquipTwig\Loader\FilesystemLoader;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class FilesystemLoaderTest extends TestCase

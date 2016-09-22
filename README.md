@@ -1,7 +1,7 @@
 ## Equip Twig
 
-[![Latest Stable Version](https://poser.pugx.org/asmaster/equip-twig/v/stable)](https://packagist.org/packages/asmaster/equip-twig)
-[![License](https://img.shields.io/packagist/l/asmaster/equip-twig.svg)](https://github.com/AlexMasterov/equip-twig/blob/master/LICENSE)
+[![Latest Stable Version](https://poser.pugx.org/alexmasterov/equip-twig/v/stable)](https://packagist.org/packages/alexmasterov/equip-twig)
+[![License](https://img.shields.io/packagist/l/alexmasterov/equip-twig.svg)](https://github.com/AlexMasterov/equip-twig/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/AlexMasterov/equip-twig.svg)](https://travis-ci.org/AlexMasterov/equip-twig)
 [![Code Coverage](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=master)
@@ -13,7 +13,7 @@ The [Twig](http://twig.sensiolabs.org/) integration for the [Equip](http://equip
 The suggested installation method is via [composer](https://getcomposer.org/):
 
 ```sh
-composer require asmaster/equip-twig
+composer require alexmasterov/equip-twig
 ```
 
 ## Configuration
@@ -22,7 +22,7 @@ To use the [`TwigFormatter`](https://github.com/AlexMasterov/equip-twig/blob/mas
 Equip\Application::build()
 ->setConfiguration([
     // ...
-    Asmaster\EquipTwig\Configuration\TwigResponderConfiguration::class
+    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class
 ])
 // ...
 ```
@@ -35,7 +35,7 @@ namespace Acme\Configuration;
 use Auryn\Injector;
 use Equip\Env;
 use Equip\Configuration\ConfigurationInterface;
-use Asmaster\EquipTwig\Configuration\TwigResponderConfiguration;
+use AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration;
 
 class TwigConfiguration implements ConfigurationInterface
 {
@@ -61,7 +61,7 @@ Equip\Application::build()
 ->setConfiguration([
     // ...
     Acme\Configuration\TwigConfiguration::class,
-    Asmaster\EquipTwig\Configuration\TwigResponderConfiguration::class
+    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class
 ])
 // ...
 ```
@@ -88,8 +88,8 @@ The easiest way to add an extensions is by using the [`TwigExtensionSet`](https:
 // src/Configuration/ExtraTwigExtension.php
 namespace Acme\Configuration;
 
-use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
-use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
+use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
+use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
 
 class ExtraTwigExtension extends TwigExtensionSet
 {
@@ -109,7 +109,7 @@ class ExtraTwigExtension extends TwigExtensionSet
 Equip\Application::build()
 ->setConfiguration([
     // ...
-    Asmaster\EquipTwig\Configuration\TwigResponderConfiguration::class,
+    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class,
     Acme\Configuration\ExtraTwigExtension::class
 ])
 // ...
@@ -117,7 +117,7 @@ Equip\Application::build()
 It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](#setting-up-the-twig-environment):
 ```php
 // ...
-use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
+use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
 
 class TwigConfiguration implements ConfigurationInterface
 {
@@ -170,7 +170,7 @@ class WidgetDomain implements DomainInterface
 Using [`PayloadRenderTrait`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Traits/PayloadRenderTrait.php) as wrapper for the usual `render` method:
 ```php
 // ...
-use Asmaster\EquipTwig\Traits\PayloadRenderTrait;
+use AlexMasterov\EquipTwig\Traits\PayloadRenderTrait;
 
 class WidgetDomain implements DomainInterface
 {

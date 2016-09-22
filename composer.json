@@ -1,5 +1,5 @@
 {
-  "name": "asmaster/equip-twig",
+  "name": "alexmasterov/equip-twig",
   "description": "The Twig integration for the Equip framework",
   "type": "library",
   "keywords": [
@@ -16,21 +16,21 @@
   }],
   "require": {
     "php": "^5.5.9 || ^7.0",
-    "equip/framework": "^2.0",
-    "twig/twig": "^1.23 || ^2.0"
+    "equip/framework": "^2.0 || ^2.1",
+    "twig/twig": "^1.25 || ^2.0"
   },
   "autoload": {
     "psr-4": {
-      "Asmaster\\EquipTwig\\": "src/"
+      "AlexMasterov\\EquipTwig\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Asmaster\\EquipTwig\\Tests\\": "tests/"
+      "AlexMasterov\\EquipTwig\\Tests\\": "tests/"
     }
   },
   "suggest": {
-    "asmaster/twig-extension": "For a custom extensions",
+    "alexmasterov/twig-extension": "For a custom extensions",
     "josegonzalez/dotenv": "For environment based configuration loading"
   }
 }

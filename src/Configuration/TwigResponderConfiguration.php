@@ -1,9 +1,9 @@
 <?php
 
-namespace Asmaster\EquipTwig\Configuration;
+namespace AlexMasterov\EquipTwig\Configuration;
 
-use Asmaster\EquipTwig\Loader\FilesystemLoader;
-use Asmaster\EquipTwig\TwigFormatter;
+use AlexMasterov\EquipTwig\Loader\FilesystemLoader;
+use AlexMasterov\EquipTwig\TwigFormatter;
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Configuration\EnvTrait;

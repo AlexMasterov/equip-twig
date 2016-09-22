@@ -1,9 +1,9 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Configuration;
+namespace AlexMasterov\EquipTwig\Tests\Configuration;
 
-use Asmaster\EquipTwig\Configuration\TwigResponderConfiguration;
-use Asmaster\EquipTwig\TwigFormatter;
+use AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration;
+use AlexMasterov\EquipTwig\TwigFormatter;
 use Auryn\Injector;
 use Equip\Configuration\AurynConfiguration;
 use Equip\Env;

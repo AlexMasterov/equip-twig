@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Exception;
+namespace AlexMasterov\EquipTwig\Exception;
 
-use Asmaster\EquipTwig\Exception\ExceptionInterface;
+use AlexMasterov\EquipTwig\Exception\ExceptionInterface;
 use InvalidArgumentException;
 use Twig_ExtensionInterface;
 

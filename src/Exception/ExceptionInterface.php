@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig\Exception;
+namespace AlexMasterov\EquipTwig\Exception;
 
 interface ExceptionInterface
 {

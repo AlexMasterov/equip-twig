@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Loader;
+namespace AlexMasterov\EquipTwig\Loader;
 
-use Asmaster\EquipTwig\Exception\LoaderException;
+use AlexMasterov\EquipTwig\Exception\LoaderException;
 use Twig_ExistsLoaderInterface;
 use Twig_LoaderInterface;
 

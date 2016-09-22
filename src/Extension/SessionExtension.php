@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig\Extension;
+namespace AlexMasterov\EquipTwig\Extension;
 
 use Equip\SessionInterface;
 use Twig_Extension;

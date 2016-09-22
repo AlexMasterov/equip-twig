@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests;
+namespace AlexMasterov\EquipTwig\Tests;
 
-use Asmaster\EquipTwig\TwigFormatter;
+use AlexMasterov\EquipTwig\TwigFormatter;
 use Equip\Adr\PayloadInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 use Twig_Environment as TwigEnvironment;

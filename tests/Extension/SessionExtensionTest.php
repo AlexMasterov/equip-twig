@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Extension;
+namespace AlexMasterov\EquipTwig\Tests\Extension;
 
-use Asmaster\EquipTwig\Extension\SessionExtension;
+use AlexMasterov\EquipTwig\Extension\SessionExtension;
 use Equip\SessionInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 use Twig_ExtensionInterface as TwigExtensionInterface;

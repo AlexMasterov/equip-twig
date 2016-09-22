@@ -1,9 +1,9 @@
 <?php
 
-namespace Asmaster\EquipTwig\Configuration;
+namespace AlexMasterov\EquipTwig\Configuration;
 
-use Asmaster\EquipTwig\Configuration\TwigExtensionSet;
-use Asmaster\EquipTwig\Extension\SessionExtension;
+use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
+use AlexMasterov\EquipTwig\Extension\SessionExtension;
 use Equip\SessionInterface;
 
 class TwigDefaultExtension extends TwigExtensionSet

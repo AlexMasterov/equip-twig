@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Configuration;
+namespace AlexMasterov\EquipTwig\Configuration;
 
-use Asmaster\EquipTwig\Exception\ExtensionException;
+use AlexMasterov\EquipTwig\Exception\ExtensionException;
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Structure\Set;

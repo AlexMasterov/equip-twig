@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig;
+namespace AlexMasterov\EquipTwig;
 
 use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;

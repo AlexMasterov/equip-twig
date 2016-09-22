@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Traits;
+namespace AlexMasterov\EquipTwig\Tests\Traits;
 
-use Asmaster\EquipTwig\Traits\PayloadRenderTrait;
+use AlexMasterov\EquipTwig\Traits\PayloadRenderTrait;
 use Equip\Adr\PayloadInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 
