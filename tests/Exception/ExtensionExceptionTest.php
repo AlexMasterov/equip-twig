@@ -1,12 +1,12 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Exception;
+namespace AlexMasterov\EquipTwigTests\Exception;
 
 use AlexMasterov\EquipTwig\Exception\ExceptionInterface;
 use AlexMasterov\EquipTwig\Exception\ExtensionException;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
-use Twig_ExtensionInterface as TwigExtensionInterface;
+use Twig_ExtensionInterface;
 use stdClass;
 
 class ExtensionExceptionTest extends TestCase
@@ -14,7 +14,7 @@ class ExtensionExceptionTest extends TestCase
     public function testInvalidExtension()
     {
         $extension = new stdClass;
-        $interface = TwigExtensionInterface::class;
+        $interface = Twig_ExtensionInterface::class;
 
         $exception = ExtensionException::invalidClass($extension);
 

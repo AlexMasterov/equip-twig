@@ -2,7 +2,6 @@
 
 namespace AlexMasterov\EquipTwig;
 
-use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;
 use Twig_Environment;
 
@@ -14,6 +13,11 @@ final class TwigFormatter extends HtmlFormatter
     private $environment;
 
     /**
+     * @var string
+     */
+    private $template;
+
+    /**
      * @param Twig_Environment $environment
      */
     public function __construct(Twig_Environment $environment)
@@ -22,25 +26,25 @@ final class TwigFormatter extends HtmlFormatter
     }
 
     /**
-     * @param PayloadInterface $payload
+     * Get a copy that uses a different template.
      *
-     * @return string
+     * @param string $template
+     *
+     * @return static
      */
-    public function body(PayloadInterface $payload)
+    public function withTemplate($template)
     {
-        return $this->render($payload);
+        $copy = clone $this;
+        $copy->template = $template;
+
+        return $copy;
     }
 
     /**
-     * @param PayloadInterface $payload
-     *
-     * @return string
+     * @inheritDoc
      */
-    private function render(PayloadInterface $payload)
+    public function format($content)
     {
-        $template = $payload->getSetting('template');
-        $output = $payload->getOutput();
-
-        return $this->environment->render($template, $output);
+        return $this->environment->render($this->template, $content);
     }
 }

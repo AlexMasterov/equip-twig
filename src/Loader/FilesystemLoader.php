@@ -3,10 +3,10 @@
 namespace AlexMasterov\EquipTwig\Loader;
 
 use AlexMasterov\EquipTwig\Exception\LoaderException;
-use Twig_ExistsLoaderInterface;
 use Twig_LoaderInterface;
+use Twig_Source;
 
-final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderInterface
+final class FilesystemLoader implements Twig_LoaderInterface
 {
     /**
      * @var string
@@ -27,20 +27,28 @@ final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderI
      * @param string $path           The template directory path
      * @param array  $fileExtensions The template file extensions
      */
-    public function __construct(
-        $path,
-        array $fileExtensions = ['html.twig', 'twig']
-    ) {
+    public function __construct($path, array $fileExtensions = [])
+    {
         $this->path = $path;
         $this->fileExtensions = $fileExtensions;
     }
 
     /**
-     * @inheritDoc
+     * For Twig 1.x compatibility.
      */
     public function getSource($name)
     {
         return file_get_contents($this->template($name));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSourceContext($name)
+    {
+        $code = file_get_contents($this->template($name));
+
+        return new Twig_Source($code, $name);
     }
 
     /**
@@ -102,7 +110,7 @@ final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderI
     {
         $files = $this->possibleTemplateFiles($name);
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $filepath = $this->path . DIRECTORY_SEPARATOR . $file;
             if (is_file($filepath) && is_readable($filepath)) {
                 return realpath($filepath);
@@ -115,18 +123,15 @@ final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderI
     /**
      * @param string $name
      *
-     * @return array
+     * @return Generator
      */
     private function possibleTemplateFiles($name)
     {
-        $name = $this->normalizeName($name);
+        yield $name = $this->normalizeName($name);
 
-        $templates = [$name];
-        foreach($this->fileExtensions as $extension) {
-            $templates[] = "{$name}.{$extension}";
+        foreach ($this->fileExtensions as $extension) {
+            yield "{$name}.{$extension}";
         }
-
-        return $templates;
     }
 
     /**
@@ -136,7 +141,8 @@ final class FilesystemLoader implements Twig_LoaderInterface, Twig_ExistsLoaderI
      */
     private function normalizeName($name)
     {
-        return preg_replace('#/{2,}#', DIRECTORY_SEPARATOR,
+        return preg_replace('#/{2,}#',
+            DIRECTORY_SEPARATOR,
             str_replace('\\', DIRECTORY_SEPARATOR, $name)
         );
     }

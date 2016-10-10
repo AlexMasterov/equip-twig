@@ -26,8 +26,10 @@ class TwigExtensionSet extends Set implements ConfigurationInterface
      *
      * @return void
      */
-    public function prepareExtension(Twig_Environment $environment, Injector $injector)
-    {
+    public function prepareExtension(
+        Twig_Environment $environment,
+        Injector $injector
+    ) {
         $extensions = $this->toArray();
 
         if ($environment->isDebug()) {

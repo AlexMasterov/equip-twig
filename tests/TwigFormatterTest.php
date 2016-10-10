@@ -1,12 +1,12 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests;
+namespace AlexMasterov\EquipTwigTests;
 
+use AlexMasterov\EquipTwigTests\Asset\Template;
 use AlexMasterov\EquipTwig\TwigFormatter;
-use Equip\Adr\PayloadInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Twig_Environment as TwigEnvironment;
-use Twig_Loader_Filesystem as TwigLoaderFilesystem;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class TwigFormatterTest extends TestCase
 {
@@ -17,38 +17,39 @@ class TwigFormatterTest extends TestCase
 
     protected function setUp()
     {
-        $loader = new TwigLoaderFilesystem(__DIR__.'/Asset/templates');
-
         $this->formatter = new TwigFormatter(
-            new TwigEnvironment($loader)
+            new Twig_Environment(
+                new Twig_Loader_Filesystem(Template::path())
+            )
         );
     }
 
     public function testAccepts()
     {
-        $this->assertEquals(['text/html'], TwigFormatter::accepts());
+        $this->assertSame(['text/html'], TwigFormatter::accepts());
     }
 
     public function testType()
     {
-        $this->assertEquals('text/html', $this->formatter->type());
+        $this->assertSame('text/html', $this->formatter->type());
     }
 
     public function testResponse()
     {
-        $template = 'test.html.twig';
-        $output = [
+        $content = [
             'header' => 'header',
             'body'   => 'body',
             'footer' => 'footer'
         ];
 
-        $payload = $this->createMock(PayloadInterface::class);
-        $payload->expects($this->any())->method('getOutput')->willReturn($output);
-        $payload->expects($this->any())->method('getSetting')->willReturn($template);
+        $payload = $this->formatter
+            ->withTemplate(Template::name())
+            ->format($content)
+            ;
 
-        $body = $this->formatter->body($payload);
-
-        $this->assertEquals("<h1>header</h1>\n<p>body</p>\n<span>footer</span>\n", $body);
+        $this->assertSame(
+            "<h1>header</h1>\n<p>body</p>\n<span>footer</span>\n",
+            $payload
+        );
     }
 }

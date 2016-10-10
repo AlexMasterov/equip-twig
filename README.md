@@ -17,16 +17,26 @@ composer require alexmasterov/equip-twig
 ```
 
 ## Configuration
-To use the [`TwigFormatter`](https://github.com/AlexMasterov/equip-twig/blob/master/src/TwigFormatter.php) implementation you need to add [`TwigResponderConfiguration`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigResponderConfiguration.php) into the [application bootstrap](https://equipframework.readthedocs.org/en/latest/#bootstrap):
+To use the [`TwigFormatter`](https://github.com/AlexMasterov/equip-twig/blob/master/src/TwigFormatter.php) implementation you need to add [`TwigConfiguration`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigResponderConfiguration.php) into the [application bootstrap](https://equipframework.readthedocs.org/en/latest/#bootstrap):
 ```php
 Equip\Application::build()
 ->setConfiguration([
     // ...
-    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class
+    AlexMasterov\EquipTwig\Configuration\TwigConfiguration::class
 ])
 // ...
 ```
 ### Setting up the Twig environment:
+[Optional configuration](https://github.com/equip/framework/blob/master/docs/index.md#setting-the-env-file), via a `.env` file:
+```shell
+TWIG_TEMPLATES = "../Resources/templates"
+TWIG_CACHE = "../var/cache/twig"
+TWIG_DEBUG = false
+TWIG_AUTO_RELOAD = true
+TWIG_STRICT_VARIABLES = false
+TWIG_FILE_EXTENSIONS = "html.twig,twig"
+
+```
 [Default configuration](https://github.com/equip/framework/blob/master/docs/index.md#dependency-injection-container), via dependency injector:
 ```php
 // src/Configuration/TwigConfiguration.php
@@ -35,9 +45,9 @@ namespace Acme\Configuration;
 use Auryn\Injector;
 use Equip\Env;
 use Equip\Configuration\ConfigurationInterface;
-use AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration;
+use AlexMasterov\EquipTwig\Configuration\TwigConfiguration;
 
-class TwigConfiguration implements ConfigurationInterface
+class TwigEnvConfiguration implements ConfigurationInterface
 {
     public function apply(Injector $injector)
     {
@@ -50,7 +60,7 @@ class TwigConfiguration implements ConfigurationInterface
                 'TWIG_FILE_EXTENSIONS'  => 'html.twig,twig'
             ]);
 
-        $injector->define(TwigResponderConfiguration::class, [
+        $injector->define(TwigConfiguration::class, [
             ':env' => $twigEnv
         ]);
     }
@@ -60,28 +70,11 @@ class TwigConfiguration implements ConfigurationInterface
 Equip\Application::build()
 ->setConfiguration([
     // ...
-    Acme\Configuration\TwigConfiguration::class,
-    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class
+    Acme\Configuration\TwigEnvConfiguration::class,
+    AlexMasterov\EquipTwig\Configuration\TwigConfiguration::class
 ])
 // ...
 ```
-[Optional configuration](https://github.com/equip/framework/blob/master/docs/index.md#setting-the-env-file), via a `.env` file:
-```shell
-TWIG_TEMPLATES = "../Resources/templates"
-TWIG_CACHE = "../var/cache/twig"
-TWIG_DEBUG = false
-TWIG_AUTO_RELOAD = true
-TWIG_STRICT_VARIABLES = false
-TWIG_FILE_EXTENSIONS = "html.twig,twig"
-
-```
-### Extensions
-[`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) — provides a Equip specific extensions.
-
-| Variable   | Description                                                       |
-|------------|-------------------------------------------------------------------|
-| [`session`](https://github.com/equip/framework/blob/master/docs/session.md#usage) | Provides access to an object instance of [`SessionInterface`]( https://github.com/equip/session/blob/master/src/SessionInterface.php)
-
 ### Adding extensions
 The easiest way to add an extensions is by using the [`TwigExtensionSet`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigExtensionSet.php) as in the example below:
 ```php
@@ -89,19 +82,14 @@ The easiest way to add an extensions is by using the [`TwigExtensionSet`](https:
 namespace Acme\Configuration;
 
 use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
-use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
 
-class ExtraTwigExtension extends TwigExtensionSet
+class AppTwigExtension extends TwigExtensionSet
 {
     public function __construct()
     {
-        $defaults = (new TwigDefaultExtension)->toArray();
-        $extra = [
-            AwesomeExtension::class,
-            AmazingExtension::class
-        ];
-
-        parent::__construct(array_merge($defaults, $extra));
+        parent::__construct([
+            AppExtension::class
+        ]);
     }
 }
 ```
@@ -109,77 +97,43 @@ class ExtraTwigExtension extends TwigExtensionSet
 Equip\Application::build()
 ->setConfiguration([
     // ...
-    AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration::class,
-    Acme\Configuration\ExtraTwigExtension::class
+    AlexMasterov\EquipTwig\Configuration\TwigConfiguration::class,
+    Acme\Configuration\AppTwigExtension::class
 ])
 // ...
-```
-It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](#setting-up-the-twig-environment):
-```php
-// ...
-use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
-
-class TwigConfiguration implements ConfigurationInterface
-{
-   public function apply(Injector $injector)
-    {
-        // ...
-        $extensions = [
-            AwesomeExtension::class,
-            AmazingExtension::class
-        ];
-
-        $injector->define(TwigDefaultExtension::class, [
-            ':extensions' => $extensions
-        ]);
-    }
-}
 ```
 ## Usage
 Basic example:
 ```php
-namespace Acme\Domain;
+namespace Acme\Action;
 
-use Equip\Adr\DomainInterface;
-use Equip\Adr\PayloadInterface;
+use AlexMasterov\EquipTwig\TwigFormatter;
+use Equip\Contract\ActionInterface;
 
-class WidgetDomain implements DomainInterface
+class DoItAction implements ActionInterface
 {
-    /**
-     * @var PayloadInterface
-     */
-    private $payload;
+    private $formatter;
 
-    public function __construct(PayloadInterface $payload)
+    public function __construct(TwigFormatter $formatter)
     {
-        $this->payload = $payload;
+        $this->formatter = $formatter;
     }
 
-    public function __invoke(array $input)
-    {
-        return $this->payload
-            ->withStatus(PayloadInterface::STATUS_OK)
-            ->withSetting('template', 'widget.html.twig')
-            ->withOutput([
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ) {
+        $response = $response->withHeader('Content-Type', $formatter->type());
+        $payload = $this->formatter
+            ->withTemplate('doit')
+            ->format([
                 'message' => 'Just do it!'
             ]);
-    }
-}
-```
 
-Using [`PayloadRenderTrait`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Traits/PayloadRenderTrait.php) as wrapper for the usual `render` method:
-```php
-// ...
-use AlexMasterov\EquipTwig\Traits\PayloadRenderTrait;
+        $body = $response->getBody();
+        $body->write($payload);
 
-class WidgetDomain implements DomainInterface
-{
-    use PayloadRenderTrait;
-
-    public function __invoke(array $input)
-    {
-        $message = 'Just do it!';
-        return $this->render('widget.html.twig', compact('message'));
+        return $response;
     }
 }
 ```
