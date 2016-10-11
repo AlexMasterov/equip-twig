@@ -1,11 +1,11 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Configuration;
+namespace AlexMasterov\EquipTwigTests\Configuration;
 
+use AlexMasterov\EquipTwigTests\Asset\EmptyInterface;
 use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
 use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
 use AlexMasterov\EquipTwig\Extension\SessionExtension;
-use AlexMasterov\EquipTwig\Tests\Asset\EmptyInterface;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\SessionInterface;
 use Equip\Structure\Set;

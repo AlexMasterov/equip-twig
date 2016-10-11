@@ -7,6 +7,7 @@ use AlexMasterov\EquipTwig\TwigFormatter;
 use Auryn\Injector;
 use Equip\Configuration\ConfigurationInterface;
 use Equip\Configuration\EnvTrait;
+use Equip\Env;
 use Equip\Responder\FormattedResponder;
 use Twig_Environment;
 
@@ -19,42 +20,33 @@ final class TwigResponderConfiguration implements ConfigurationInterface
      */
     public function apply(Injector $injector)
     {
-        $injector->prepare(FormattedResponder::class, function(FormattedResponder $responder) {
-            return $responder->withValue(TwigFormatter::class, 1.0);
-        });
-
-        $injector->define(FilesystemLoader::class, [
-            ':path'           => $this->env->getValue('TWIG_TEMPLATES'),
-            ':fileExtensions' => $this->getEnvFileExtensions()
-        ]);
+        $env = $this->env;
+        $options = $this->options($env);
 
         $injector->define(Twig_Environment::class, [
             'loader'   => FilesystemLoader::class,
-            ':options' => $this->getEnvOptions()
+            ':options' => $options
         ]);
+
+        list($path,$fileExtensions) = $this->filesystemConfig($env);
+
+        $injector->define(FilesystemLoader::class, [
+            ':path'           => $path,
+            ':fileExtensions' => $fileExtensions
+        ]);
+
+        $injector->prepare(FormattedResponder::class, function(FormattedResponder $responder) {
+            return $responder->withValue(TwigFormatter::class, 1.0);
+        });
     }
 
     /**
-     * @return array
-     */
-    public function getEnvFileExtensions()
-    {
-        $fileExtensions = $this->env->getValue('TWIG_FILE_EXTENSIONS', ['html.twig', 'twig']);
-
-        if (is_string($fileExtensions)) {
-            $fileExtensions = explode(',', $fileExtensions);
-        }
-
-        return $fileExtensions;
-    }
-
-    /**
+     * @param Env $env
+     *
      * @return array Configuration options from environment variables
      */
-    public function getEnvOptions()
+    private function options(Env $env)
     {
-        $env = $this->env;
-
         $options = [
             'debug'            => $env->getValue('TWIG_DEBUG', false),
             'auto_reload'      => $env->getValue('TWIG_AUTO_RELOAD', true),
@@ -63,5 +55,22 @@ final class TwigResponderConfiguration implements ConfigurationInterface
         ];
 
         return $options;
+    }
+
+    /**
+     * @param Env $env
+     *
+     * @return array
+     */
+    private function filesystemConfig(Env $env)
+    {
+        $path = $env->getValue('TWIG_TEMPLATES');
+        $fileExtensions = $env->getValue('TWIG_FILE_EXTENSIONS', ['html.twig', 'twig']);
+
+        if (is_string($fileExtensions)) {
+            $fileExtensions = explode(',', $fileExtensions);
+        }
+
+        return [$path, $fileExtensions];
     }
 }

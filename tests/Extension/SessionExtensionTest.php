@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Extension;
+namespace AlexMasterov\EquipTwigTests\Extension;
 
 use AlexMasterov\EquipTwig\Extension\SessionExtension;
 use Equip\SessionInterface;

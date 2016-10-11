@@ -1,7 +1,8 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Traits;
+namespace AlexMasterov\EquipTwigTests\Traits;
 
+use AlexMasterov\EquipTwigTests\Asset\Template;
 use AlexMasterov\EquipTwig\Traits\PayloadInterfaceRenderTrait;
 use Equip\Adr\PayloadInterface;
 use Equip\Payload;
@@ -23,12 +24,11 @@ class PayloadInterfaceRenderTraitTest extends TestCase
 
     public function testPayloadInterfaceRender()
     {
-        $template = 'test.html.twig';
         $output = [
             'body' => 'body'
         ];
 
-        $payload = $this->render($template, $output);
+        $payload = $this->render(Template::name(), $output);
 
         $this->assertEquals($output, $payload->getOutput());
     }

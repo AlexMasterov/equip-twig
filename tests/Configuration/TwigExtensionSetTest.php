@@ -1,43 +1,41 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Configuration;
+namespace AlexMasterov\EquipTwigTests\Configuration;
 
+use AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration;
 use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
 use AlexMasterov\EquipTwig\Exception\ExtensionException;
 use Auryn\Injector;
-use Equip\Configuration\ConfigurationInterface;
-use Equip\Structure\Set;
+use Equip\Env;
 use PHPUnit_Framework_TestCase as TestCase;
-use Twig_Environment as TwigEnvironment;
-use Twig_Extension_Debug as TwigExtensionDebug;
+use Twig_Environment;
 
 class TwigExtensionSetTest extends TestCase
 {
-    public function testSet()
+    public function testThenDebugIsEnabled()
     {
-        $defaultExtension = new TwigExtensionSet();
+        $config = [
+            'TWIG_DEBUG' => true
+        ];
 
-        $this->assertInstanceOf(TwigExtensionSet::class, $defaultExtension);
-        $this->assertInstanceOf(Set::class, $defaultExtension);
-        $this->assertInstanceOf(ConfigurationInterface::class, $defaultExtension);
-    }
-
-    public function testApply()
-    {
         $injector = new Injector();
-        $injector->define(TwigEnvironment::class, [
-            ':options' => ['debug' => true]
-        ]);
+        $injector->prepare(Env::class, function (Env $env) use ($config) {
+            return $env->withValues($config);
+        });
 
-        $extensionSet = new TwigExtensionSet();
-        $extensionSet->apply($injector);
+        $configuration = $injector->make(TwigResponderConfiguration::class);
+        $configuration->apply($injector);
+        $configuration = $injector->make(TwigExtensionSet::class);
+        $configuration->apply($injector);
 
-        $twig = $injector->make(TwigEnvironment::class);
+        $twig = $injector->make(Twig_Environment::class);
 
+        $this->assertTrue($twig->isDebug());
         $this->assertArrayHasKey('debug', $twig->getExtensions());
+        // $this->assertArrayHasKey('Twig_Extension_Debug', $twig->getExtensions());
     }
 
-    public function testInvalidExtension()
+    public function testThenExtensionIsInvalid()
     {
         $this->expectException(ExtensionException::class);
 

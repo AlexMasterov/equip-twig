@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Tests\Asset;
+namespace AlexMasterov\EquipTwigTests\Asset;
 
 /**
  * An interface with no methods
