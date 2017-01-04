@@ -12,7 +12,7 @@ git:
 
 env:
   global:
-    - PHPUNIT_VERSION="^5.5"
+    - PHPUNIT_VERSION="^5.7"
 
 matrix:
   fast_finish: true
@@ -22,9 +22,6 @@ matrix:
         - COMPOSER_FLAGS="--prefer-stable"
     - php: 7
     - php: 7.1
-    - php: hhvm
-  allow_failures:
-    - php: hhvm
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
