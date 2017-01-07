@@ -1,29 +1,28 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Traits;
+namespace AlexMasterov\EquipTwig\Tests\Traits;
 
-use AlexMasterov\EquipTwigTests\Asset\Template;
 use AlexMasterov\EquipTwig\Payload\PayloadRenderTrait;
+use AlexMasterov\EquipTwig\Tests\TestCase;
 use Equip\Adr\PayloadInterface;
-use PHPUnit_Framework_TestCase as TestCase;
 
 class PayloadRenderTraitTest extends TestCase
 {
     use PayloadRenderTrait;
 
-    public function testPayload()
-    {
-        $this->assertInstanceOf(PayloadInterface::class, $this->payload());
-    }
-
     public function testPayloadRender()
     {
+        // Stab
+        $template = $this->template('test.html.twig');
         $output = [
-            'body' => 'body'
+            'body' => 'body',
         ];
 
-        $payload = $this->render(Template::name(), $output);
+        // Execute
+        $payload = $this->render($template->name(), $output);
 
-        $this->assertSame($output, $payload->getOutput());
+        // Verify
+        self::assertInstanceOf(PayloadInterface::class, $payload);
+        self::assertEquals($output, $payload->getOutput());
     }
 }

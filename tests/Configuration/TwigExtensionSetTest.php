@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Configuration;
+namespace AlexMasterov\EquipTwig\Tests\Configuration;
 
 use AlexMasterov\EquipTwig\Configuration\TwigResponderConfiguration;
 use AlexMasterov\EquipTwig\Configuration\TwigExtensionSet;
@@ -14,8 +14,10 @@ class TwigExtensionSetTest extends TestCase
 {
     public function testThenDebugIsEnabled()
     {
+        // Stab
         $config = [
-            'TWIG_DEBUG' => true
+            'TWIG_DEBUG' => true,
+            'TWIG_TEMPLATES' => __DIR__
         ];
 
         $injector = new Injector();
@@ -28,17 +30,19 @@ class TwigExtensionSetTest extends TestCase
         $configuration = $injector->make(TwigExtensionSet::class);
         $configuration->apply($injector);
 
+        // Execute
         $twig = $injector->make(Twig_Environment::class);
 
-        $this->assertTrue($twig->isDebug());
-        $this->assertArrayHasKey('debug', $twig->getExtensions());
-        // $this->assertArrayHasKey('Twig_Extension_Debug', $twig->getExtensions());
+        // Verify
+        self::assertTrue($twig->isDebug());
     }
 
     public function testThenExtensionIsInvalid()
     {
-        $this->expectException(ExtensionException::class);
+        // Verify
+        self::expectException(ExtensionException::class);
 
+        // Execute
         new TwigExtensionSet([new \stdClass]);
     }
 }

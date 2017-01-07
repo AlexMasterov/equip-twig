@@ -1,13 +1,10 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests;
+namespace AlexMasterov\EquipTwig\Tests;
 
-use AlexMasterov\EquipTwigTests\Asset\Template;
+use AlexMasterov\EquipTwig\Tests\TestCase;
 use AlexMasterov\EquipTwig\TwigFormatter;
 use Equip\Adr\PayloadInterface;
-use PHPUnit_Framework_TestCase as TestCase;
-use Twig_Environment;
-use Twig_Loader_Filesystem;
 
 class TwigFormatterTest extends TestCase
 {
@@ -18,38 +15,39 @@ class TwigFormatterTest extends TestCase
 
     protected function setUp()
     {
-        $this->formatter = new TwigFormatter(
-            new Twig_Environment(
-                new Twig_Loader_Filesystem(Template::path())
-            )
-        );
+        $this->formatter = new TwigFormatter($this->twig());
     }
 
     public function testAccepts()
     {
-        $this->assertSame(['text/html'], TwigFormatter::accepts());
+        self::assertSame(['text/html'], TwigFormatter::accepts());
     }
 
     public function testType()
     {
-        $this->assertSame('text/html', $this->formatter->type());
+        self::assertSame('text/html', $this->formatter->type());
     }
 
     public function testResponse()
     {
+        // Stab
+        $template = $this->template('test.html.twig');
         $output = [
             'header' => 'header',
             'body'   => 'body',
-            'footer' => 'footer'
+            'footer' => 'footer',
         ];
 
-        $payload = $this->createMock(PayloadInterface::class);
-        $payload->expects($this->any())->method('getOutput')->willReturn($output);
-        $payload->expects($this->any())->method('getSetting')->willReturn(Template::name());
+        // Mock
+        $payload = self::createMock(PayloadInterface::class);
+        $payload->expects(self::any())->method('getOutput')->willReturn($output);
+        $payload->expects(self::any())->method('getSetting')->willReturn($template->name());
 
+        // Execute
         $body = $this->formatter->body($payload);
 
-        $this->assertSame(
+        // Verify
+        self::assertSame(
             "<h1>header</h1>\n<p>body</p>\n<span>footer</span>\n",
             $body
         );

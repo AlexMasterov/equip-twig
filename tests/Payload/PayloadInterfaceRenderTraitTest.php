@@ -1,12 +1,11 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Payload;
+namespace AlexMasterov\EquipTwig\Tests\Payload;
 
-use AlexMasterov\EquipTwigTests\Asset\Template;
 use AlexMasterov\EquipTwig\Payload\PayloadInterfaceRenderTrait;
+use AlexMasterov\EquipTwig\Tests\TestCase;
 use Equip\Adr\PayloadInterface;
 use Equip\Payload;
-use PHPUnit_Framework_TestCase as TestCase;
 
 class PayloadInterfaceRenderTraitTest extends TestCase
 {
@@ -17,19 +16,19 @@ class PayloadInterfaceRenderTraitTest extends TestCase
         $this->payload = new Payload;
     }
 
-    public function testPayloadInterface()
-    {
-        $this->assertInstanceOf(PayloadInterface::class, $this->payload);
-    }
-
     public function testPayloadInterfaceRender()
     {
+        // Stab
+        $template = $this->template('test.html.twig');
         $output = [
-            'body' => 'body'
+            'body' => 'body',
         ];
 
-        $payload = $this->render(Template::name(), $output);
+        // Execute
+        $payload = $this->render($template->name(), $output);
 
-        $this->assertEquals($output, $payload->getOutput());
+        // Verify
+        self::assertInstanceOf(PayloadInterface::class, $payload);
+        self::assertEquals($output, $payload->getOutput());
     }
 }
