@@ -1,10 +1,10 @@
 ## Equip Twig
 
-[![Latest Stable Version](https://poser.pugx.org/alexmasterov/equip-twig/v/stable)](https://packagist.org/packages/alexmasterov/equip-twig)
-[![License](https://img.shields.io/packagist/l/alexmasterov/equip-twig.svg)](https://github.com/AlexMasterov/equip-twig/blob/master/LICENSE)
+[![Latest Stable Version](https://poser.pugx.org/alexmasterov/equip-twig/v/2.0)](https://packagist.org/packages/alexmasterov/equip-twig)
+[![License](https://img.shields.io/packagist/l/alexmasterov/equip-twig.svg)](https://github.com/AlexMasterov/equip-twig/blob/2.0/LICENSE)
 [![Build Status](https://travis-ci.org/AlexMasterov/equip-twig.svg)](https://travis-ci.org/AlexMasterov/equip-twig)
-[![Code Coverage](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/coverage.png?b=2.0)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=2.0)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/badges/quality-score.png?b=2.0)](https://scrutinizer-ci.com/g/AlexMasterov/equip-twig/?branch=2.0)
 
 The [Twig](http://twig.sensiolabs.org/) integration for the [Equip](http://equip.github.io/).
 
@@ -17,7 +17,7 @@ composer require alexmasterov/equip-twig
 ```
 
 ## Configuration
-To use the [`TwigFormatter`](https://github.com/AlexMasterov/equip-twig/blob/master/src/TwigFormatter.php) implementation you need to add [`TwigResponderConfiguration`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigResponderConfiguration.php) into the [application bootstrap](https://equipframework.readthedocs.org/en/latest/#bootstrap):
+To use the [`TwigFormatter`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/TwigFormatter.php) implementation you need to add [`TwigResponderConfiguration`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/Configuration/TwigResponderConfiguration.php) into the [application bootstrap](https://equipframework.readthedocs.org/en/latest/#bootstrap):
 ```php
 Equip\Application::build()
 ->setConfiguration([
@@ -76,14 +76,14 @@ TWIG_FILE_EXTENSIONS = "html.twig,twig"
 
 ```
 ### Extensions
-[`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) — provides a Equip specific extensions.
+[`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/Configuration/TwigDefaultExtension.php) — provides a Equip specific extensions.
 
 | Variable   | Description                                                       |
 |------------|-------------------------------------------------------------------|
 | [`session`](https://github.com/equip/framework/blob/master/docs/session.md#usage) | Provides access to an object instance of [`SessionInterface`]( https://github.com/equip/session/blob/master/src/SessionInterface.php)
 
 ### Adding extensions
-The easiest way to add an extensions is by using the [`TwigExtensionSet`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigExtensionSet.php) as in the example below:
+The easiest way to add an extensions is by using the [`TwigExtensionSet`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/Configuration/TwigExtensionSet.php) as in the example below:
 ```php
 // src/Configuration/ExtraTwigExtension.php
 namespace Acme\Configuration;
@@ -114,7 +114,7 @@ Equip\Application::build()
 ])
 // ...
 ```
-It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](#setting-up-the-twig-environment):
+It\`s also possible to expand [`TwigDefaultExtension`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/Configuration/TwigDefaultExtension.php) following example of the [Default configuration](#setting-up-the-twig-environment):
 ```php
 // ...
 use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
@@ -167,10 +167,10 @@ class WidgetDomain implements DomainInterface
 }
 ```
 
-Using [`PayloadRenderTrait`](https://github.com/AlexMasterov/equip-twig/blob/master/src/Traits/PayloadRenderTrait.php) as wrapper for the usual `render` method:
+Using [`PayloadRenderTrait`](https://github.com/AlexMasterov/equip-twig/blob/2.0/src/Payload/PayloadRenderTrait.php) as wrapper for the usual `render` method:
 ```php
 // ...
-use AlexMasterov\EquipTwig\Traits\PayloadRenderTrait;
+use AlexMasterov\EquipTwig\Payload\PayloadRenderTrait;
 
 class WidgetDomain implements DomainInterface
 {

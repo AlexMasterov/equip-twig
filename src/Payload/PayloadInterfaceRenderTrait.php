@@ -1,19 +1,19 @@
 <?php
 
-namespace AlexMasterov\EquipTwig\Traits;
+namespace AlexMasterov\EquipTwig\Payload;
 
 use Equip\Adr\PayloadInterface;
 
 trait PayloadInterfaceRenderTrait
 {
     /**
-     * @var \Equip\Adr\PayloadInterface
+     * @var PayloadInterface
      */
     protected $payload;
 
     /**
-     * @param string $template The template name
-     * @param array  $output   The output produced by the domain layer
+     * @param string $template
+     * @param array  $output
      *
      * @return PayloadInterface
      */

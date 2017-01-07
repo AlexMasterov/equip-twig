@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Traits;
+namespace AlexMasterov\EquipTwigTests\Payload;
 
 use AlexMasterov\EquipTwigTests\Asset\Template;
-use AlexMasterov\EquipTwig\Traits\PayloadInterfaceRenderTrait;
+use AlexMasterov\EquipTwig\Payload\PayloadInterfaceRenderTrait;
 use Equip\Adr\PayloadInterface;
 use Equip\Payload;
 use PHPUnit_Framework_TestCase as TestCase;

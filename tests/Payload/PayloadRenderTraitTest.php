@@ -3,7 +3,7 @@
 namespace AlexMasterov\EquipTwigTests\Traits;
 
 use AlexMasterov\EquipTwigTests\Asset\Template;
-use AlexMasterov\EquipTwig\Traits\PayloadRenderTrait;
+use AlexMasterov\EquipTwig\Payload\PayloadRenderTrait;
 use Equip\Adr\PayloadInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 
