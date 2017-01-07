@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace AlexMasterov\EquipTwig\Loader;
 
@@ -16,23 +17,20 @@ final class FilesystemLoader implements Twig_LoaderInterface
     /**
      * @var array
      */
-    private $fileExtensions = [];
+    private $fileExtensions = ['html.twig', 'twig'];
 
     /**
      * @var array
      */
     private $cache = [];
 
-    /**
-     * @param string $path           The template directory path
-     * @param array  $fileExtensions The template file extensions
-     */
-    public function __construct(
-        $path,
-        array $fileExtensions = ['html.twig', 'twig']
-    ) {
+    public function __construct(string $path, array $fileExtensions = null)
+    {
         $this->path = $path;
-        $this->fileExtensions = $fileExtensions;
+
+        if ($fileExtensions) {
+            $this->fileExtensions = $fileExtensions;
+        }
     }
 
     /**

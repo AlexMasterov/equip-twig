@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Exception;
 
-interface ExceptionInterface
+use Throwable;
+
+interface ExceptionInterface extends Throwable
 {
 }

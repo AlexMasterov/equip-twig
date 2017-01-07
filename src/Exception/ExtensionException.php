@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Exception;
 
@@ -10,10 +11,8 @@ class ExtensionException extends InvalidArgumentException implements ExceptionIn
 {
     /**
      * @param string|object $spec
-     *
-     * @return static
      */
-    public static function invalidClass($spec)
+    public static function invalidClass($spec): self
     {
         if (is_object($spec)) {
             $spec = get_class($spec);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Configuration;
 
@@ -16,9 +17,6 @@ final class TwigConfiguration implements ConfigurationInterface
 
     const PREFIX = 'TWIG_';
 
-    /**
-     * @param Injector $injector
-     */
     public function apply(Injector $injector)
     {
         $env = $this->env;
@@ -36,24 +34,14 @@ final class TwigConfiguration implements ConfigurationInterface
         ]);
     }
 
-    /**
-     * @param Env $env
-     *
-     * @return array
-     */
-    private function fileExtensions(Env $env)
+    private function fileExtensions(Env $env): array
     {
         $fileExtensions = $env->getValue('TWIG_FILE_EXTENSIONS', 'html.twig,twig');
 
         return explode(',', $fileExtensions);
     }
 
-    /**
-     * @param Env $env
-     *
-     * @return array
-     */
-    private function options(Env $env)
+    private function options(Env $env): array
     {
        static $options = [
             'debug'               => false,
@@ -76,12 +64,7 @@ final class TwigConfiguration implements ConfigurationInterface
         return $options;
     }
 
-    /**
-     * @param Env $env
-     *
-     * @return array
-     */
-    private function envTwig(Env $env)
+    private function envTwig(Env $env): array
     {
         $twigFilter = static function ($value) {
             return stristr($value, self::PREFIX);

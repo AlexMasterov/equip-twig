@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig;
 
@@ -17,9 +18,6 @@ final class TwigFormatter extends HtmlFormatter
      */
     private $template;
 
-    /**
-     * @param Twig_Environment $environment
-     */
     public function __construct(Twig_Environment $environment)
     {
         $this->environment = $environment;
