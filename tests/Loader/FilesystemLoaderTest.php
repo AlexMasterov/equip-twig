@@ -1,105 +1,95 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Loader;
+namespace AlexMasterov\EquipTwig\Tests\Loader;
 
-use AlexMasterov\EquipTwigTests\Asset\Template;
 use AlexMasterov\EquipTwig\Exception\LoaderException;
 use AlexMasterov\EquipTwig\Loader\FilesystemLoader;
-use PHPUnit_Framework_TestCase as TestCase;
+use AlexMasterov\EquipTwig\Tests\TestCase;
 use Twig_Source;
 
 class FilesystemLoaderTest extends TestCase
 {
-    public function testConstructor()
-    {
-        $fileExtensions = ['html.twig'];
-
-        $loader = new FilesystemLoader(
-            Template::path(),
-            $fileExtensions
-        );
-
-        $class = new \ReflectionClass($loader);
-
-        // path
-        $propPath = $class->getProperty('path');
-        $propPath->setAccessible(true);
-
-        $this->assertSame(Template::path(), $propPath->getValue($loader));
-
-        // fileExtensions
-        $propFileExtensions = $class->getProperty('fileExtensions');
-        $propFileExtensions->setAccessible(true);
-
-        $this->assertEquals($fileExtensions, $propFileExtensions->getValue($loader));
-    }
-
-    public function testGetSource()
-    {
-        $loader = new FilesystemLoader(Template::path());
-        $source = $loader->getSource(Template::name());
-
-        $this->assertSame(Template::code(), $source);
-    }
-
     public function testGetSourceContext()
     {
-        $loader = new FilesystemLoader(Template::path());
-        $source = $loader->getSourceContext(Template::name());
+        // Stab
+        $template = $this->template('test.html.twig');
 
-        $this->assertInstanceOf(Twig_Source::class, $source);
-        $this->assertSame(Template::name(), $source->getName());
-        $this->assertSame(Template::code(), $source->getCode());
+        // Execute
+        $loader = new FilesystemLoader($template->path());
+        $source = $loader->getSourceContext($template->name());
+
+        // Verify
+        self::assertInstanceOf(Twig_Source::class, $source);
+        self::assertSame($template->name(), $source->getName());
+        self::assertSame($template->code(), $source->getCode());
     }
 
     public function testGetCacheKey()
     {
-        $loader = new FilesystemLoader(Template::path());
-        $loader->getSourceContext(Template::name());
+        // Stab
+        $template = $this->template('test.html.twig');
 
-        $cacheKey = $loader->getCacheKey(Template::name());
+        // Execute
+        $loader = new FilesystemLoader($template->path());
+        $loader->getSourceContext($template->name());
 
-        $this->assertSame(Template::templatePath(), $cacheKey);
+        $cacheKey = $loader->getCacheKey($template->name());
+
+        // Verify
+        self::assertSame(realpath($template->templatePath()), $cacheKey);
     }
 
     public function testIsFresh()
     {
-        $loader = new FilesystemLoader(Template::path());
+        // Stab
+        $template = $this->template('test.html.twig');
 
-        $this->assertTrue(
-            $loader->isFresh(Template::name(), time())
+        // Execute
+        $loader = new FilesystemLoader($template->path());
+
+        // Verify
+        self::assertTrue(
+            $loader->isFresh($template->name(), time())
         );
     }
 
     public function testExists()
     {
-        $loader = new FilesystemLoader(Template::path(), ['html.twig']);
+        // Stab
+        $template = $this->template('test.html.twig');
+        $ext = 'html.twig';
 
-        $this->assertTrue(
-            $loader->exists(Template::name())
+        // Execute
+        $loader = new FilesystemLoader($template->path(), [$ext]);
+
+        // Verify
+        self::assertTrue($loader->exists($template->name()));
+
+        // Execute (with cached)
+        $loader->getSourceContext($template->name());
+
+        // Verify
+        self::assertTrue($loader->exists($template->name()));
+
+        // Execute (without .ext)
+        $loader->getSourceContext(
+            basename($template->name(), ".{$ext}")
         );
 
-        // cached
-        $loader->getSourceContext(Template::name());
-
-        $this->assertTrue(
-            $loader->exists(Template::name())
-        );
-
-        // without .ext
-        $name = strstr(Template::name(), '.', true);
-        $loader->getSourceContext($name);
-
-        $this->assertTrue(
-            $loader->exists($name)
-        );
+        // Verify
+        self::assertTrue($loader->exists($template->name()));
     }
 
     public function testThenTemplateNotFound()
     {
-        $this->expectException(LoaderException::class);
+        // Verify
+        self::expectException(LoaderException::class);
 
-        $loader = new FilesystemLoader(Template::path());
+        // Stab
+        $template = $this->template('test.html.twig');
+
+        // Execute
+        $loader = new FilesystemLoader($template->path());
         $loader->getSourceContext('nowhere.html.twig');
     }
 }

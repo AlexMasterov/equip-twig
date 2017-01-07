@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexMasterov\EquipTwigTests\Configuration;
+namespace AlexMasterov\EquipTwig\Tests\Configuration;
 
 use AlexMasterov\EquipTwig\Configuration\TwigConfiguration;
 use Auryn\Injector;
@@ -11,8 +11,10 @@ class TwigConfigurationTest extends TestCase
 {
     public function testApply()
     {
+        // Stab
         $config = [
-            'TWIG_FILE_EXTENSIONS' => 'html.twig,twig'
+            'TWIG_FILE_EXTENSIONS' => 'html.twig,twig',
+            'TWIG_TEMPLATES' => __DIR__
         ];
 
         $injector = new Injector;
