@@ -34,7 +34,7 @@ final class TwigResponderConfiguration implements ConfigurationInterface
             ':options' => $this->options($env),
         ]);
 
-        $injector->prepare(FormattedResponder::class, function(FormattedResponder $responder) {
+        $injector->prepare(FormattedResponder::class, static function (FormattedResponder $responder) {
             return $responder->withValue(TwigFormatter::class, 1.0);
         });
     }
