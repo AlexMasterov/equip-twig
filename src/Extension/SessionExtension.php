@@ -1,12 +1,11 @@
 <?php
 
-namespace Asmaster\EquipTwig\Extension;
+namespace AlexMasterov\EquipTwig\Extension;
 
 use Equip\SessionInterface;
-use Twig_Extension as TwigExtension;
-use Twig_Extension_GlobalsInterface as TwigExtensionGlobalsInterface;
+use Twig_Extension;
 
-class SessionExtension extends TwigExtension implements TwigExtensionGlobalsInterface
+class SessionExtension extends Twig_Extension
 {
     /**
      * @var SessionInterface

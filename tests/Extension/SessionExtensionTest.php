@@ -1,11 +1,11 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Extension;
+namespace AlexMasterov\EquipTwig\Tests\Extension;
 
-use Asmaster\EquipTwig\Extension\SessionExtension;
+use AlexMasterov\EquipTwig\Extension\SessionExtension;
 use Equip\SessionInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Twig_ExtensionInterface as TwigExtensionInterface;
+use Twig_ExtensionInterface;
 
 class SessionExtensionTest extends TestCase
 {
@@ -14,7 +14,7 @@ class SessionExtensionTest extends TestCase
         $session = $this->getMock(SessionInterface::class);
         $extension = new SessionExtension($session);
 
-        $this->assertInstanceOf(TwigExtensionInterface::class, $extension);
+        $this->assertInstanceOf(Twig_ExtensionInterface::class, $extension);
         $this->assertSame('equip_session', $extension->getName());
 
         $this->assertArrayHasKey('session', $extension->getGlobals());

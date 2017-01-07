@@ -1,8 +1,8 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Exception;
+namespace AlexMasterov\EquipTwig\Tests\Exception;
 
-use Asmaster\EquipTwig\Exception\ExtensionException;
+use AlexMasterov\EquipTwig\Exception\ExtensionException;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 

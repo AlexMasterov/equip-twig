@@ -1,9 +1,9 @@
 <?php
 
-namespace Asmaster\EquipTwig\Exception;
+namespace AlexMasterov\EquipTwig\Exception;
 
 use InvalidArgumentException;
-use Twig_ExtensionInterface as TwigExtensionInterface;
+use Twig_ExtensionInterface;
 
 class ExtensionException extends InvalidArgumentException
 {
@@ -21,7 +21,7 @@ class ExtensionException extends InvalidArgumentException
         return new static(sprintf(
             'Twig extension `%s` must implement `%s`',
             $spec,
-            TwigExtensionInterface::class
+            Twig_ExtensionInterface::class
         ));
     }
 }

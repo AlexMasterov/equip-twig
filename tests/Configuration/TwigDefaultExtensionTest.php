@@ -1,10 +1,10 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests\Configuration;
+namespace AlexMasterov\EquipTwig\Tests\Configuration;
 
-use Asmaster\EquipTwig\Configuration\TwigDefaultExtension;
-use Asmaster\EquipTwig\Extension\SessionExtension;
-use Asmaster\EquipTwig\Tests\Asset\EmptyInterface;
+use AlexMasterov\EquipTwig\Configuration\TwigDefaultExtension;
+use AlexMasterov\EquipTwig\Extension\SessionExtension;
+use AlexMasterov\EquipTwig\Tests\Asset\EmptyInterface;
 use Equip\SessionInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Asmaster\EquipTwig\Tests;
+namespace AlexMasterov\EquipTwig\Tests;
 
-use Asmaster\EquipTwig\TwigFormatter;
+use AlexMasterov\EquipTwig\TwigFormatter;
 use Equip\Adr\PayloadInterface;
 use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPUnit_Framework_TestCase as TestCase;
-use Twig_Environment as TwigEnvironment;
-use Twig_Loader_Filesystem as TwigLoaderFilesystem;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class TwigFormatterTest extends TestCase
 {
@@ -18,10 +18,10 @@ class TwigFormatterTest extends TestCase
 
     protected function setUp()
     {
-        $loader = new TwigLoaderFilesystem(__DIR__.'/Asset/templates');
+        $loader = new Twig_Loader_Filesystem(__DIR__.'/Asset/templates');
 
         $this->formatter = new TwigFormatter(
-            new TwigEnvironment($loader),
+            new Twig_Environment($loader),
             new HttpStatus
         );
     }

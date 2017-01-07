@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Asmaster\\EquipTwig\\": "src/"
+      "AlexMasterov\\EquipTwig\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Asmaster\\EquipTwig\\Tests\\": "tests/"
+      "AlexMasterov\\EquipTwig\\Tests\\": "tests/"
     }
   },
   "suggest": {

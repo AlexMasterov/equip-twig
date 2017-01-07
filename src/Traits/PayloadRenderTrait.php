@@ -1,6 +1,6 @@
 <?php
 
-namespace Asmaster\EquipTwig\Traits;
+namespace AlexMasterov\EquipTwig\Traits;
 
 use Equip\Payload;
 

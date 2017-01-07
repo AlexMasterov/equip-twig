@@ -1,25 +1,25 @@
 <?php
 
-namespace Asmaster\EquipTwig;
+namespace AlexMasterov\EquipTwig;
 
 use Equip\Adr\PayloadInterface;
 use Equip\Formatter\HtmlFormatter;
 use Lukasoppermann\Httpstatus\Httpstatus;
-use Twig_Environment as TwigEnvironment;
+use Twig_Environment;
 
 class TwigFormatter extends HtmlFormatter
 {
     /**
-     * @var TwigEnvironment
+     * @var Twig_Environment
      */
     protected $environment;
 
     /**
-     * @param TwigEnvironment  $environment
+     * @param Twig_Environment  $environment
      * @param Httpstatus       $httpStatus
      */
     public function __construct(
-        TwigEnvironment $environment,
+        Twig_Environment $environment,
         Httpstatus $httpStatus
     )
     {
