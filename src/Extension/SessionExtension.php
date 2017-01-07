@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Extension;
 
@@ -13,23 +14,17 @@ final class SessionExtension extends Twig_Extension implements Twig_Extension_Gl
      */
     private $session;
 
-    /**
-     * @param SessionInterface $session
-     */
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
     }
 
-    /**
-     * @return string The extension name
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'equip_session';
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [
             'session' => $this->session

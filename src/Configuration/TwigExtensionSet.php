@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Configuration;
 
@@ -12,20 +13,11 @@ use Twig_Extension_Debug;
 
 class TwigExtensionSet extends Set implements ConfigurationInterface
 {
-    /**
-     * @param Injector $injector
-     */
     public function apply(Injector $injector)
     {
         $injector->prepare(Twig_Environment::class, [$this, 'prepareExtension']);
     }
 
-    /**
-     * @param Twig_Environment  $environment
-     * @param Injector          $injector
-     *
-     * @return void
-     */
     public function prepareExtension(
         Twig_Environment $environment,
         Injector $injector

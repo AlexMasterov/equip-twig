@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Payload;
 
@@ -11,13 +12,7 @@ trait PayloadInterfaceRenderTrait
      */
     protected $payload;
 
-    /**
-     * @param string $template
-     * @param array  $output
-     *
-     * @return PayloadInterface
-     */
-    protected function render($template, array $output = [])
+    protected function render(string $template, array $output = []): PayloadInterface
     {
         return $this->payload
             ->withStatus(PayloadInterface::STATUS_OK)

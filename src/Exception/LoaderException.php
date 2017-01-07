@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Exception;
 
@@ -7,13 +8,7 @@ use Twig_Error_Loader;
 
 class LoaderException extends Twig_Error_Loader implements ExceptionInterface
 {
-    /**
-     * @param string $name  The template name
-     * @param string $where The template directory path
-     *
-     * @return static
-     */
-    public static function notFound($name, $where)
+    public static function notFound(string $name, string $where): self
     {
         return new static(sprintf(
             'Unable to find template `%s` (looked into: %s).',

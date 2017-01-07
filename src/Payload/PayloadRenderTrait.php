@@ -1,18 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig\Payload;
 
+use Equip\Adr\PayloadInterface;
 use Equip\Payload;
 
 trait PayloadRenderTrait
 {
-    /**
-     * @param string $template
-     * @param array  $output
-     *
-     * @return PayloadInterface
-     */
-    protected function render($template, array $output = [])
+    protected function render(string $template, array $output = []): PayloadInterface
     {
         return (new Payload)
             ->withStatus(Payload::STATUS_OK)

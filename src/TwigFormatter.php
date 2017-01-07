@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace AlexMasterov\EquipTwig;
 
@@ -13,30 +14,17 @@ final class TwigFormatter extends HtmlFormatter
      */
     private $environment;
 
-    /**
-     * @param Twig_Environment $environment
-     */
     public function __construct(Twig_Environment $environment)
     {
         $this->environment = $environment;
     }
 
-    /**
-     * @param PayloadInterface $payload
-     *
-     * @return string
-     */
-    public function body(PayloadInterface $payload)
+    public function body(PayloadInterface $payload): string
     {
         return $this->render($payload);
     }
 
-    /**
-     * @param PayloadInterface $payload
-     *
-     * @return string
-     */
-    private function render(PayloadInterface $payload)
+    private function render(PayloadInterface $payload): string
     {
         $template = $payload->getSetting('template');
         $output = $payload->getOutput();
