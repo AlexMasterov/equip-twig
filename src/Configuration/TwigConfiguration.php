@@ -14,40 +14,64 @@ final class TwigConfiguration implements ConfigurationInterface
 {
     use EnvTrait;
 
+    const PREFIX = 'TWIG_';
+
     /**
      * @param Injector $injector
      */
     public function apply(Injector $injector)
     {
         $env = $this->env;
-        $options = $this->options($env);
 
-        $injector->define(Twig_Environment::class, [
-            'loader'   => FilesystemLoader::class,
-            ':options' => $options
-        ]);
-
-        list($path,$fileExtensions) = $this->filesystemConfig($env);
+        $path = $env->getValue('TWIG_TEMPLATES');
 
         $injector->define(FilesystemLoader::class, [
             ':path'           => $path,
-            ':fileExtensions' => $fileExtensions
+            ':fileExtensions' => $this->fileExtensions($env),
+        ]);
+
+        $injector->define(Twig_Environment::class, [
+            'loader'   => FilesystemLoader::class,
+            ':options' => $this->options($env),
         ]);
     }
 
     /**
      * @param Env $env
      *
-     * @return array Configuration options from environment variables
+     * @return array
+     */
+    private function fileExtensions(Env $env)
+    {
+        $fileExtensions = $env->getValue('TWIG_FILE_EXTENSIONS', 'html.twig,twig');
+
+        return explode(',', $fileExtensions);
+    }
+
+    /**
+     * @param Env $env
+     *
+     * @return array
      */
     private function options(Env $env)
     {
-        $options = [
-            'debug'            => $env->getValue('TWIG_DEBUG', false),
-            'auto_reload'      => $env->getValue('TWIG_AUTO_RELOAD', true),
-            'strict_variables' => $env->getValue('TWIG_STRICT_VARIABLES', false),
-            'cache'            => $env->getValue('TWIG_CACHE', false)
+       static $options = [
+            'debug'               => false,
+            'strict_variables'    => false,
+            'cache'               => false,
+            'auto_reload'         => false,
+            'charset'             => 'UTF-8',
+            'autoescape'          => 'html',
+            'base_template_class' => 'Twig_Template',
+            'optimizations'       => -1,
         ];
+
+        foreach ($this->envTwig($env) as $option => $value) {
+            list(, $option) = explode('_', strtolower($option), 2);
+            if (isset($options[$option])) {
+                $options[$option] = $value;
+            }
+        }
 
         return $options;
     }
@@ -57,15 +81,12 @@ final class TwigConfiguration implements ConfigurationInterface
      *
      * @return array
      */
-    private function filesystemConfig(Env $env)
+    private function envTwig(Env $env)
     {
-        $path = $env->getValue('TWIG_TEMPLATES');
-        $fileExtensions = $env->getValue('TWIG_FILE_EXTENSIONS', ['html.twig', 'twig']);
+        $twigFilter = static function ($value) {
+            return stristr($value, self::PREFIX);
+        };
 
-        if (is_string($fileExtensions)) {
-            $fileExtensions = explode(',', $fileExtensions);
-        }
-
-        return [$path, $fileExtensions];
+        return array_filter($env->toArray(), $twigFilter, ARRAY_FILTER_USE_KEY);
     }
 }

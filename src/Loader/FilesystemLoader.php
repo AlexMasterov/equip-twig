@@ -27,18 +27,12 @@ final class FilesystemLoader implements Twig_LoaderInterface
      * @param string $path           The template directory path
      * @param array  $fileExtensions The template file extensions
      */
-    public function __construct($path, array $fileExtensions = [])
-    {
+    public function __construct(
+        $path,
+        array $fileExtensions = ['html.twig', 'twig']
+    ) {
         $this->path = $path;
         $this->fileExtensions = $fileExtensions;
-    }
-
-    /**
-     * For Twig 1.x compatibility.
-     */
-    public function getSource($name)
-    {
-        return file_get_contents($this->template($name));
     }
 
     /**
